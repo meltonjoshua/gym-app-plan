@@ -15,7 +15,7 @@ import { RootState } from '../../store';
 import { logout } from '../../store/slices/authSlice';
 import { clearUser } from '../../store/slices/userSlice';
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }: any) {
   const { currentUser } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
@@ -128,6 +128,12 @@ export default function ProfileScreen() {
           title="Notifications"
           subtitle="Manage your notification preferences"
           onPress={() => Alert.alert('Notifications', 'Feature coming soon!')}
+        />
+        <ProfileItem
+          icon="watch"
+          title="Wearable Devices"
+          subtitle="Connect fitness trackers and smartwatches"
+          onPress={() => navigation.navigate('WearableDevices')}
         />
         <ProfileItem
           icon="time"

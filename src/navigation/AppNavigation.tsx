@@ -17,6 +17,12 @@ import WorkoutSessionScreen from '../screens/workouts/WorkoutSessionScreen';
 import ProgressScreen from '../screens/progress/ProgressScreen';
 import NutritionScreen from '../screens/nutrition/NutritionScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+// Phase 2: Social features
+import SocialScreen from '../screens/social/SocialScreen';
+// Phase 2: AI features
+import AIInsightsScreen from '../screens/main/AIInsightsScreen';
+// Phase 2: Wearable integration
+import WearableDevicesScreen from '../screens/wearables/WearableDevicesScreen';
 
 // Navigation types
 export type AuthStackParamList = {
@@ -29,8 +35,19 @@ export type MainTabParamList = {
   Home: undefined;
   Workouts: undefined;
   Progress: undefined;
+  Social: undefined; // Phase 2: Social tab
   Nutrition: undefined;
   Profile: undefined;
+};
+
+export type HomeStackParamList = {
+  HomeMain: undefined;
+  AIInsights: undefined;
+};
+
+export type ProfileStackParamList = {
+  ProfileMain: undefined;
+  WearableDevices: undefined;
 };
 
 export type WorkoutStackParamList = {
@@ -41,7 +58,43 @@ export type WorkoutStackParamList = {
 
 const AuthStack = createStackNavigator<AuthStackParamList>();
 const MainTab = createBottomTabNavigator<MainTabParamList>();
+const HomeStack = createStackNavigator<HomeStackParamList>(); // Phase 2: Home stack
+const ProfileStack = createStackNavigator<ProfileStackParamList>(); // Phase 2: Profile stack
 const WorkoutStack = createStackNavigator<WorkoutStackParamList>();
+
+function HomeNavigator() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen 
+        name="HomeMain" 
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <HomeStack.Screen 
+        name="AIInsights" 
+        component={AIInsightsScreen}
+        options={{ headerShown: false }}
+      />
+    </HomeStack.Navigator>
+  );
+}
+
+function ProfileNavigator() {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen 
+        name="ProfileMain" 
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <ProfileStack.Screen 
+        name="WearableDevices" 
+        component={WearableDevicesScreen}
+        options={{ headerShown: false }}
+      />
+    </ProfileStack.Navigator>
+  );
+}
 
 function WorkoutNavigator() {
   return (
@@ -88,6 +141,8 @@ function MainNavigator() {
             iconName = focused ? 'fitness' : 'fitness-outline';
           } else if (route.name === 'Progress') {
             iconName = focused ? 'analytics' : 'analytics-outline';
+          } else if (route.name === 'Social') {
+            iconName = focused ? 'people' : 'people-outline';
           } else if (route.name === 'Nutrition') {
             iconName = focused ? 'restaurant' : 'restaurant-outline';
           } else if (route.name === 'Profile') {
@@ -101,11 +156,12 @@ function MainNavigator() {
         headerShown: false,
       })}
     >
-      <MainTab.Screen name="Home" component={HomeScreen} />
+      <MainTab.Screen name="Home" component={HomeNavigator} />
       <MainTab.Screen name="Workouts" component={WorkoutNavigator} />
       <MainTab.Screen name="Progress" component={ProgressScreen} />
+      <MainTab.Screen name="Social" component={SocialScreen} />
       <MainTab.Screen name="Nutrition" component={NutritionScreen} />
-      <MainTab.Screen name="Profile" component={ProfileScreen} />
+      <MainTab.Screen name="Profile" component={ProfileNavigator} />
     </MainTab.Navigator>
   );
 }

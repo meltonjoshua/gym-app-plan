@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -9,14 +9,28 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
+// Phase 2: AI Recommendations
+import { setRecommendations, addRecommendation } from '../../store/slices/aiSlice';
+import { sampleRecommendations } from '../../data/sampleData';
 
 const { width } = Dimensions.get('window');
 
 export default function HomeScreen({ navigation }: any) {
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state: RootState) => state.user);
   const { currentSession } = useSelector((state: RootState) => state.workouts);
+  // Phase 2: AI Recommendations
+  const { recommendations } = useSelector((state: RootState) => state.ai);
+  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
+
+  useEffect(() => {
+    // Load AI recommendations on component mount
+    if (recommendations.length === 0) {
+      dispatch(setRecommendations(sampleRecommendations));
+    }
+  }, [dispatch, recommendations.length]);
 
   const getCurrentGreeting = () => {
     const hour = new Date().getHours();
@@ -106,6 +120,76 @@ export default function HomeScreen({ navigation }: any) {
           />
         </View>
       </View>
+
+      {/* AI Recommendations - Phase 2 */}
+      {recommendations.length > 0 && (
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>AI Recommendations</Text>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('AIInsights')}
+              style={styles.viewAllButton}
+            >
+              <Text style={styles.viewAllText}>Full Analysis</Text>
+              <Ionicons name="analytics" size={16} color="#667eea" />
+            </TouchableOpacity>
+          </View>
+          
+          {recommendations.slice(0, showAllRecommendations ? recommendations.length : 2).map((rec) => (
+            <View key={rec.id} style={styles.recommendationCard}>
+              <View style={styles.recommendationHeader}>
+                <View style={styles.recommendationTitleContainer}>
+                  <Ionicons 
+                    name={rec.recommendationType === 'next_workout' ? 'fitness' : rec.recommendationType === 'rest_day' ? 'bed' : 'bulb'} 
+                    size={20} 
+                    color="#667eea" 
+                  />
+                  <Text style={styles.recommendationTitle}>{rec.title}</Text>
+                </View>
+                <View style={styles.confidenceContainer}>
+                  <Ionicons name="analytics" size={14} color="#52c41a" />
+                  <Text style={styles.confidenceText}>
+                    {Math.round(rec.confidence * 100)}% match
+                  </Text>
+                </View>
+              </View>
+              
+              <Text style={styles.recommendationDescription}>{rec.description}</Text>
+              
+              <View style={styles.reasoningContainer}>
+                <Text style={styles.reasoningTitle}>Why this recommendation:</Text>
+                {rec.reasoning.map((reason, index) => (
+                  <Text key={index} style={styles.reasoningItem}>• {reason}</Text>
+                ))}
+              </View>
+              
+              <View style={styles.recommendationActions}>
+                <TouchableOpacity 
+                  style={styles.acceptButton}
+                  onPress={() => {
+                    // In a real app, this would navigate to the recommended workout
+                    console.log('Accepting recommendation:', rec.id);
+                  }}
+                >
+                  <Ionicons name="checkmark" size={16} color="white" />
+                  <Text style={styles.acceptButtonText}>Accept</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity 
+                  style={styles.dismissButton}
+                  onPress={() => {
+                    // In a real app, this would remove the recommendation
+                    console.log('Dismissing recommendation:', rec.id);
+                  }}
+                >
+                  <Ionicons name="close" size={16} color="#666" />
+                  <Text style={styles.dismissButtonText}>Dismiss</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))}
+        </View>
+      )}
 
       {/* Quick Actions */}
       <View style={styles.section}>
@@ -318,5 +402,133 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     fontStyle: 'italic',
+  },
+  // Phase 2: AI Recommendations styles
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  viewAllButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: '#f0f7ff',
+    borderRadius: 20,
+  },
+  viewAllText: {
+    fontSize: 14,
+    color: '#667eea',
+    fontWeight: '600',
+    marginRight: 4,
+  },
+  recommendationCard: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderLeftWidth: 4,
+    borderLeftColor: '#667eea',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  recommendationHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 8,
+  },
+  recommendationTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  recommendationTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    marginLeft: 8,
+    flex: 1,
+  },
+  confidenceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f6ffed',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  confidenceText: {
+    fontSize: 12,
+    color: '#52c41a',
+    fontWeight: '600',
+    marginLeft: 4,
+  },
+  recommendationDescription: {
+    fontSize: 14,
+    color: '#666',
+    lineHeight: 20,
+    marginBottom: 12,
+  },
+  reasoningContainer: {
+    backgroundColor: '#f8f9ff',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+  },
+  reasoningTitle: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#667eea',
+    marginBottom: 6,
+  },
+  reasoningItem: {
+    fontSize: 12,
+    color: '#666',
+    lineHeight: 16,
+    marginBottom: 2,
+  },
+  recommendationActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  acceptButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#667eea',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 8,
+    flex: 0.48,
+    justifyContent: 'center',
+  },
+  acceptButtonText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '600',
+    marginLeft: 6,
+  },
+  dismissButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 8,
+    flex: 0.48,
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  dismissButtonText: {
+    color: '#666',
+    fontSize: 14,
+    fontWeight: '600',
+    marginLeft: 6,
   },
 });
