@@ -29,6 +29,12 @@ import VirtualTrainerScreen from '../screens/main/VirtualTrainerScreen';
 import TrainerMarketplaceScreen from '../screens/marketplace/TrainerMarketplaceScreen';
 // Phase 3: Enhanced Nutrition
 import AdvancedNutritionScreen from '../screens/nutrition/AdvancedNutritionScreen';
+// Phase 6: Enterprise & Monetization
+import SubscriptionManagementScreen from '../screens/enterprise/SubscriptionManagementScreen';
+import CorporateWellnessDashboard from '../screens/enterprise/CorporateWellnessDashboard';
+import FranchiseManagementScreen from '../screens/enterprise/FranchiseManagementScreen';
+// Phase 8: Quantum AI
+import QuantumAIControlCenterScreen from '../screens/ai/QuantumAIControlCenterScreen';
 
 // Navigation types
 export type AuthStackParamList = {
@@ -50,12 +56,16 @@ export type HomeStackParamList = {
   HomeMain: undefined;
   AIInsights: undefined;
   VirtualTrainer: undefined; // Phase 3: Virtual Trainer
+  QuantumAIControlCenter: undefined; // Phase 8: Quantum AI
 };
 
 export type ProfileStackParamList = {
   ProfileMain: undefined;
   WearableDevices: undefined;
   TrainerMarketplace: undefined; // Phase 3: Trainer Marketplace
+  SubscriptionManagement: undefined; // Phase 6: Subscription Management
+  CorporateWellness: undefined; // Phase 6: Corporate Wellness
+  FranchiseManagement: undefined; // Phase 6: Franchise Management
 };
 
 export type NutritionStackParamList = {
@@ -94,6 +104,11 @@ function HomeNavigator() {
         component={VirtualTrainerScreen}
         options={{ headerShown: false }}
       />
+      <HomeStack.Screen 
+        name="QuantumAIControlCenter" 
+        component={QuantumAIControlCenterScreen}
+        options={{ headerShown: false }}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -114,6 +129,21 @@ function ProfileNavigator() {
       <ProfileStack.Screen 
         name="TrainerMarketplace" 
         component={TrainerMarketplaceScreen}
+        options={{ headerShown: false }}
+      />
+      <ProfileStack.Screen 
+        name="SubscriptionManagement" 
+        component={SubscriptionManagementScreen}
+        options={{ headerShown: false }}
+      />
+      <ProfileStack.Screen 
+        name="CorporateWellness" 
+        component={CorporateWellnessDashboard}
+        options={{ headerShown: false }}
+      />
+      <ProfileStack.Screen 
+        name="FranchiseManagement" 
+        component={FranchiseManagementScreen}
         options={{ headerShown: false }}
       />
     </ProfileStack.Navigator>

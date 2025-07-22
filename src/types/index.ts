@@ -924,3 +924,586 @@ export interface AdvancedNutritionState extends NutritionState {
   recipes: Recipe[];
   groceryLists: GroceryItem[][];
 }
+
+// Phase 6: Enterprise & Monetization Types
+export interface SubscriptionTier {
+  id: string;
+  name: string;
+  displayName: string;
+  description: string;
+  price: number;
+  currency: string;
+  billingPeriod: 'monthly' | 'yearly';
+  features: string[];
+  limits: {
+    maxWorkoutPlans?: number;
+    maxNutritionPlans?: number;
+    maxTrainerSessions?: number;
+    maxGroupMemberships?: number;
+    storageLimit?: number; // in MB
+    aiInteractionsPerMonth?: number;
+  };
+  isPopular: boolean;
+  isActive: boolean;
+  createdAt: Date;
+}
+
+export interface UserSubscription {
+  id: string;
+  userId: string;
+  tierId: string;
+  status: 'active' | 'cancelled' | 'expired' | 'trial' | 'past_due';
+  startDate: Date;
+  endDate: Date;
+  trialEndDate?: Date;
+  autoRenew: boolean;
+  paymentMethodId?: string;
+  lastPaymentDate?: Date;
+  nextPaymentDate?: Date;
+  cancelledAt?: Date;
+  cancellationReason?: string;
+}
+
+export interface PaymentMethod {
+  id: string;
+  userId: string;
+  type: 'credit_card' | 'debit_card' | 'paypal' | 'apple_pay' | 'google_pay';
+  last4: string;
+  brand: string;
+  expiryMonth: number;
+  expiryYear: number;
+  isDefault: boolean;
+  createdAt: Date;
+}
+
+export interface UsageMetrics {
+  userId: string;
+  subscriptionId: string;
+  period: Date;
+  metrics: {
+    workoutsCompleted: number;
+    mealsLogged: number;
+    trainerSessions: number;
+    aiInteractions: number;
+    storageUsed: number; // in MB
+    groupsJoined: number;
+    streamsWatched: number;
+    recipesGenerated: number;
+  };
+  limits: {
+    workoutPlansUsed: number;
+    nutritionPlansUsed: number;
+    trainerSessionsUsed: number;
+    groupMembershipsUsed: number;
+    aiInteractionsUsed: number;
+  };
+  overageCharges?: OverageCharge[];
+}
+
+export interface OverageCharge {
+  type: string;
+  unitsOver: number;
+  pricePerUnit: number;
+  totalCharge: number;
+}
+
+export interface CorporateAccount {
+  id: string;
+  companyName: string;
+  domain: string;
+  industry: string;
+  employeeCount: number;
+  contactPerson: {
+    name: string;
+    email: string;
+    phone: string;
+    title: string;
+  };
+  subscriptionTier: string;
+  customBranding: {
+    logo: string;
+    primaryColor: string;
+    secondaryColor: string;
+    companyName: string;
+  };
+  wellnessProgram: WellnessProgram;
+  settings: CorporateSettings;
+  createdAt: Date;
+  isActive: boolean;
+}
+
+export interface WellnessProgram {
+  id: string;
+  name: string;
+  description: string;
+  goals: WellnessGoal[];
+  departments: Department[];
+  challenges: CorporateChallenge[];
+  incentives: Incentive[];
+  reporting: ReportingSettings;
+  privacy: PrivacySettings;
+  startDate: Date;
+  endDate?: Date;
+  isActive: boolean;
+}
+
+export interface ReportingSettings {
+  frequency: 'weekly' | 'monthly' | 'quarterly';
+  metrics: string[];
+  recipients: string[];
+  includePersonalData: boolean;
+  dashboardAccess: string[];
+}
+
+export interface PrivacySettings {
+  anonymizeData: boolean;
+  aggregationLevel: 'individual' | 'department' | 'company';
+  shareWithManagers: boolean;
+  shareWithHR: boolean;
+  retentionPeriod: number; // days
+}
+
+export interface WellnessGoal {
+  type: 'participation_rate' | 'health_metrics' | 'engagement' | 'cost_savings';
+  target: number;
+  unit: string;
+  timeframe: 'monthly' | 'quarterly' | 'yearly';
+  description: string;
+}
+
+export interface Department {
+  id: string;
+  name: string;
+  employeeCount: number;
+  manager?: {
+    name: string;
+    email: string;
+  };
+  goals: WellnessGoal[];
+  metrics: DepartmentMetrics;
+  budget?: number;
+}
+
+export interface DepartmentMetrics {
+  participationRate: number;
+  averageWorkoutsPerWeek: number;
+  healthScoreImprovement: number;
+  stressReductionScore: number;
+  engagementScore: number;
+  roiMetrics: {
+    healthcareCostSavings: number;
+    productivityGain: number;
+    absenteeismReduction: number;
+  };
+}
+
+export interface CorporateChallenge extends Challenge {
+  departmentId?: string;
+  corporateAccountId: string;
+  budget: number;
+  approvalStatus: 'pending' | 'approved' | 'rejected';
+  approvedBy?: string;
+  complianceFlags: ComplianceFlag[];
+}
+
+export interface Incentive {
+  id: string;
+  name: string;
+  description: string;
+  type: 'points' | 'gift_card' | 'time_off' | 'merchandise' | 'cash_bonus';
+  value: number;
+  requirements: IncentiveRequirement[];
+  eligibilityPeriod: {
+    startDate: Date;
+    endDate: Date;
+  };
+  claimDeadline: Date;
+  isActive: boolean;
+}
+
+export interface IncentiveRequirement {
+  type: 'workout_streak' | 'challenge_completion' | 'health_screening' | 'program_participation';
+  value: number;
+  timeframe: string;
+}
+
+export interface BusinessAnalytics {
+  corporateAccountId?: string;
+  period: {
+    startDate: Date;
+    endDate: Date;
+  };
+  revenue: RevenueAnalytics;
+  userEngagement: EngagementAnalytics;
+  healthOutcomes: HealthOutcomeAnalytics;
+  predictiveInsights: PredictiveAnalytics;
+  generatedAt: Date;
+}
+
+export interface RevenueAnalytics {
+  totalRevenue: number;
+  subscriptionRevenue: number;
+  corporateRevenue: number;
+  trainerMarketplaceRevenue: number;
+  overageRevenue: number;
+  churnRate: number;
+  averageRevenuePerUser: number;
+  lifetimeValue: number;
+  conversionRates: {
+    trialToSubscription: number;
+    freeToTrial: number;
+    subscriptionUpgrade: number;
+  };
+  revenueByTier: { [tierName: string]: number };
+  geographicBreakdown: { [region: string]: number };
+}
+
+export interface EngagementAnalytics {
+  dailyActiveUsers: number;
+  monthlyActiveUsers: number;
+  sessionDuration: number;
+  workoutCompletionRate: number;
+  featureUsage: { [featureName: string]: number };
+  userRetention: {
+    day1: number;
+    day7: number;
+    day30: number;
+    day90: number;
+  };
+  cohortAnalysis: CohortData[];
+  satisfactionScores: {
+    nps: number;
+    csat: number;
+    appStoreRating: number;
+  };
+}
+
+export interface HealthOutcomeAnalytics {
+  averageWeightLoss: number;
+  fitnessLevelImprovement: number;
+  adherenceRate: number;
+  goalCompletionRate: number;
+  healthRiskReduction: number;
+  biometricImprovements: {
+    bloodPressure: number;
+    cholesterol: number;
+    bodyFat: number;
+    vo2Max: number;
+  };
+  corporateOutcomes?: {
+    absenteeismReduction: number;
+    productivityIncrease: number;
+    healthcareCostSavings: number;
+    employeeSatisfaction: number;
+  };
+}
+
+export interface PredictiveAnalytics {
+  churnPrediction: ChurnPrediction[];
+  revenueForecasting: RevenueForecasting;
+  userBehaviorPredictions: UserBehaviorPrediction[];
+  marketTrends: MarketTrend[];
+  riskAssessment: RiskAssessment[];
+}
+
+export interface ChurnPrediction {
+  userId: string;
+  churnProbability: number;
+  riskFactors: string[];
+  recommendedActions: string[];
+  timeToChurn: number; // days
+}
+
+export interface RevenueForecasting {
+  nextMonth: number;
+  nextQuarter: number;
+  nextYear: number;
+  confidence: number;
+  factors: string[];
+  scenarios: {
+    optimistic: number;
+    realistic: number;
+    pessimistic: number;
+  };
+}
+
+export interface UserBehaviorPrediction {
+  userId: string;
+  behaviorType: 'upgrade_likelihood' | 'feature_adoption' | 'engagement_drop' | 'trainer_booking';
+  probability: number;
+  timeframe: number; // days
+  confidence: number;
+}
+
+export interface MarketTrend {
+  category: 'fitness_trends' | 'competitor_analysis' | 'industry_growth' | 'technology_adoption';
+  trend: string;
+  impact: 'positive' | 'negative' | 'neutral';
+  confidence: number;
+  timeframe: string;
+}
+
+export interface RiskAssessment {
+  type: 'financial' | 'operational' | 'compliance' | 'competitive';
+  risk: string;
+  probability: number;
+  impact: number;
+  mitigation: string[];
+  status: 'identified' | 'monitoring' | 'mitigating' | 'resolved';
+}
+
+export interface CohortData {
+  cohortMonth: string;
+  userCount: number;
+  retentionByMonth: { [month: string]: number };
+}
+
+export interface FranchiseLocation {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  zipCode: string;
+  franchiseeInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    startDate: Date;
+  };
+  branding: FranchiseBranding;
+  performance: LocationPerformance;
+  subscription: {
+    tierId: string;
+    memberLimit: number;
+    customFeatures: string[];
+  };
+  isActive: boolean;
+  createdAt: Date;
+}
+
+export interface FranchiseBranding {
+  logo: string;
+  primaryColor: string;
+  secondaryColor: string;
+  locationName: string;
+  customDomain?: string;
+  socialMediaHandles?: {
+    facebook?: string;
+    instagram?: string;
+    twitter?: string;
+  };
+  brandingCompliance: ComplianceStatus;
+}
+
+export interface LocationPerformance {
+  memberCount: number;
+  monthlyRevenue: number;
+  memberSatisfaction: number;
+  classAttendance: number;
+  trainerUtilization: number;
+  equipmentUsage: number;
+  marketPenetration: number;
+  growthRate: number;
+  kpis: { [metric: string]: number };
+  benchmarks: { [metric: string]: number };
+  lastUpdated: Date;
+}
+
+export interface ComplianceStatus {
+  overall: 'compliant' | 'minor_issues' | 'major_issues' | 'non_compliant';
+  brandGuidelines: boolean;
+  contentStandards: boolean;
+  serviceStandards: boolean;
+  lastAudit: Date;
+  nextAudit: Date;
+  issues: ComplianceFlag[];
+}
+
+export interface ComplianceFlag {
+  id: string;
+  type: 'branding' | 'content' | 'service' | 'legal' | 'safety';
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  description: string;
+  detectedAt: Date;
+  status: 'open' | 'acknowledged' | 'resolving' | 'resolved';
+  assignedTo?: string;
+  dueDate?: Date;
+  resolutionNotes?: string;
+}
+
+export interface EnterpriseSecurityConfig {
+  authentication: {
+    mfaRequired: boolean;
+    biometricAuth: boolean;
+    sessionTimeout: number; // minutes
+    passwordPolicy: PasswordPolicy;
+  };
+  dataProtection: {
+    encryptionStandard: string;
+    keyRotationFrequency: number; // days
+    backupEncryption: boolean;
+    dataRetentionPeriod: number; // days
+  };
+  compliance: {
+    frameworks: ComplianceFramework[];
+    auditFrequency: number; // months
+    lastAudit: Date;
+    nextAudit: Date;
+    complianceScore: number;
+  };
+  monitoring: {
+    threatDetection: boolean;
+    anomalyDetection: boolean;
+    realTimeAlerts: boolean;
+    logRetention: number; // days
+  };
+}
+
+export interface PasswordPolicy {
+  minLength: number;
+  requireUppercase: boolean;
+  requireLowercase: boolean;
+  requireNumbers: boolean;
+  requireSymbols: boolean;
+  expirationDays: number;
+  historyCount: number;
+}
+
+export interface ComplianceFramework {
+  name: 'HIPAA' | 'GDPR' | 'SOC2' | 'ISO27001' | 'CCPA';
+  status: 'compliant' | 'in_progress' | 'non_compliant';
+  lastAssessment: Date;
+  nextAssessment: Date;
+  requirements: ComplianceRequirement[];
+}
+
+export interface ComplianceRequirement {
+  id: string;
+  description: string;
+  status: 'met' | 'partially_met' | 'not_met';
+  evidence?: string[];
+  responsible: string;
+  dueDate?: Date;
+}
+
+export interface SecurityEvent {
+  id: string;
+  type: 'login_attempt' | 'data_access' | 'permission_change' | 'threat_detected' | 'compliance_violation';
+  severity: 'info' | 'warning' | 'critical';
+  userId?: string;
+  ipAddress: string;
+  userAgent: string;
+  description: string;
+  metadata: { [key: string]: any };
+  timestamp: Date;
+  resolved: boolean;
+  resolvedBy?: string;
+  resolvedAt?: Date;
+  resolutionNotes?: string;
+}
+
+// Extended State Types for Phase 6
+export interface SubscriptionState {
+  currentSubscription?: UserSubscription;
+  availableTiers: SubscriptionTier[];
+  paymentMethods: PaymentMethod[];
+  usageMetrics?: UsageMetrics;
+  billingHistory: BillingRecord[];
+  isLoading: boolean;
+  error?: string;
+}
+
+export interface BillingRecord {
+  id: string;
+  subscriptionId: string;
+  amount: number;
+  currency: string;
+  billingDate: Date;
+  status: 'paid' | 'pending' | 'failed' | 'refunded';
+  invoiceUrl?: string;
+  description: string;
+}
+
+export interface CorporateWellnessState {
+  account?: CorporateAccount;
+  wellnessProgram?: WellnessProgram;
+  departments: Department[];
+  challenges: CorporateChallenge[];
+  analytics: BusinessAnalytics;
+  employees: CorporateEmployee[];
+  incentives: Incentive[];
+  complianceStatus: ComplianceStatus;
+  isLoading: boolean;
+  error?: string;
+}
+
+export interface CorporateEmployee {
+  id: string;
+  employeeId: string;
+  name: string;
+  email: string;
+  departmentId: string;
+  role: string;
+  joinDate: Date;
+  wellnessMetrics: EmployeeWellnessMetrics;
+  participationHistory: ParticipationRecord[];
+  incentivesEarned: IncentiveRecord[];
+  isActive: boolean;
+}
+
+export interface EmployeeWellnessMetrics {
+  healthScore: number;
+  fitnessLevel: number;
+  participationRate: number;
+  workoutsPerWeek: number;
+  stressLevel: number;
+  sleepQuality: number;
+  nutritionScore: number;
+  goalCompletionRate: number;
+  lastUpdated: Date;
+}
+
+export interface ParticipationRecord {
+  activityType: 'workout' | 'challenge' | 'health_screening' | 'workshop';
+  activityId: string;
+  date: Date;
+  duration: number;
+  outcome: string;
+  points: number;
+}
+
+export interface IncentiveRecord {
+  incentiveId: string;
+  earnedDate: Date;
+  claimedDate?: Date;
+  value: number;
+  status: 'earned' | 'claimed' | 'expired';
+}
+
+export interface CorporateSettings {
+  privacy: {
+    shareAggregatedData: boolean;
+    shareIndividualData: boolean;
+    dataRetentionPeriod: number;
+  };
+  features: {
+    enableSocialFeatures: boolean;
+    enableTrainerBookings: boolean;
+    enableNutritionTracking: boolean;
+    enableWearableSync: boolean;
+    enableAICoaching: boolean;
+  };
+  notifications: {
+    weeklyReports: boolean;
+    monthlyReports: boolean;
+    complianceAlerts: boolean;
+    performanceAlerts: boolean;
+  };
+  integrations: {
+    hrSystem?: string;
+    healthPlatform?: string;
+    benefitsProvider?: string;
+  };
+}

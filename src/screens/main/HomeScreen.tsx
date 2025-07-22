@@ -224,6 +224,13 @@ export default function HomeScreen({ navigation }: any) {
             onPress={() => navigation.navigate('VirtualTrainer')}
           />
           <QuickActionCard
+            title="Quantum AI"
+            description="Next-gen consciousness computing"
+            icon="sparkles"
+            color="#9c27b0"
+            onPress={() => navigation.navigate('QuantumAIControlCenter')}
+          />
+          <QuickActionCard
             title="View Plans"
             description="Explore workout programs"
             icon="list"
