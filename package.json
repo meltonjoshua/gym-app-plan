@@ -9,7 +9,15 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "echo \"No tests specified\" && exit 0",
-    "type-check": "tsc --noEmit --skipLibCheck"
+    "type-check": "tsc --noEmit --skipLibCheck",
+    "build:dev": "eas build --profile development",
+    "build:preview": "eas build --profile preview",
+    "build:production": "eas build --profile production",
+    "submit:ios": "eas submit --platform ios",
+    "submit:android": "eas submit --platform android",
+    "deploy": "eas update --branch production",
+    "prebuild": "expo prebuild",
+    "install:deps": "npm install && cd backend && npm install"
   },
   "keywords": [
     "fitness",
@@ -37,9 +45,16 @@
     "expo-font": "^13.3.2",
     "expo-image-picker": "^16.1.4",
     "expo-linear-gradient": "^14.1.5",
+    "expo-localization": "^15.0.3",
     "expo-notifications": "^0.31.4",
     "expo-secure-store": "^14.2.3",
+<<<<<<< Updated upstream
+    "expo-sensors": "^14.1.4",
+=======
+    "expo-sensors": "~13.0.3",
+>>>>>>> Stashed changes
     "expo-status-bar": "~2.2.3",
+    "i18n-js": "^4.4.3",
     "moment": "^2.30.1",
     "react": "19.0.0",
     "react-native": "0.79.5",

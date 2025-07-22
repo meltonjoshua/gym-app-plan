@@ -2,20 +2,39 @@
   "expo": {
     "name": "FitTracker Pro",
     "slug": "fittracker-pro",
-    "description": "A world-class gym and fitness tracking app",
+    "description": "World-class fitness tracking with AI-powered workouts, real-time coaching, and comprehensive health monitoring. Transform your fitness journey with personalized training programs, nutrition guidance, and social challenges.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "privacy": "public",
+    "primaryColor": "#667eea",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#667eea"
     },
+    "assetBundlePatterns": [
+      "assets/**/*",
+      "src/assets/**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fittrackerpro.app"
+      "bundleIdentifier": "com.fittrackerpro.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "FitTracker Pro uses the camera to capture progress photos and scan food barcodes for nutrition tracking.",
+        "NSPhotoLibraryUsageDescription": "FitTracker Pro accesses your photo library to save progress photos and share achievements.",
+        "NSHealthShareUsageDescription": "FitTracker Pro integrates with Apple Health to sync workout data, heart rate, and health metrics for comprehensive fitness tracking.",
+        "NSHealthUpdateUsageDescription": "FitTracker Pro writes workout data to Apple Health to keep your fitness information synchronized across all your health apps.",
+        "NSMotionUsageDescription": "FitTracker Pro uses motion sensors to automatically detect and track your workouts and daily activity.",
+        "NSLocationWhenInUseUsageDescription": "FitTracker Pro uses location to find nearby gyms, track outdoor workouts, and provide location-based fitness recommendations.",
+        "UIBackgroundModes": ["background-processing", "background-fetch"]
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -23,16 +42,61 @@
         "backgroundColor": "#667eea"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.fittrackerpro.app"
+      "package": "com.fittrackerpro.app",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "BODY_SENSORS",
+        "ACTIVITY_RECOGNITION",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "WAKE_LOCK",
+        "VIBRATE",
+        "RECEIVE_BOOT_COMPLETED"
+      ]
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#667eea",
+          "defaultChannel": "default"
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "FitTracker Pro uses the camera to capture progress photos and scan nutrition barcodes."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "FitTracker Pro accesses photos to save progress images and share fitness achievements."
+        }
+      ]
+    ],
     "extra": {
       "eas": {
-        "projectId": "your-project-id-here"
+        "projectId": "fittracker-pro-2024"
       }
     },
-    "owner": "meltonjoshua"
+    "owner": "meltonjoshua",
+    "updates": {
+      "url": "https://u.expo.dev/fittracker-pro-2024"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
 }

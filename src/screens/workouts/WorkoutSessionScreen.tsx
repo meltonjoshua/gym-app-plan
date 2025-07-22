@@ -47,6 +47,7 @@ export default function WorkoutSessionScreen({ route, navigation }: any) {
       workoutId: workoutId,
       userId: '1',
       startTime: new Date(),
+      date: new Date(),
       isCompleted: false,
       completedExercises: [],
     }));
