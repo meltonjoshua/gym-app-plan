@@ -28,14 +28,50 @@
     },
     "production": {
       "ios": {
-        "resourceClass": "m-medium",
+        "resourceClass": "m-large",
         "autoIncrement": true,
-        "bundleIdentifier": "com.fittrackerpro.app"
+        "bundleIdentifier": "com.fittrackerpro.app",
+        "buildConfiguration": "Release",
+        "scheme": "FitTrackerPro",
+        "simulator": false,
+        "image": "macos-monterey-12.4-xcode-14.0",
+        "node": "18",
+        "cache": {
+          "disabled": false,
+          "key": "ios-production-cache-v1",
+          "paths": [
+            "node_modules",
+            "ios/Pods"
+          ]
+        },
+        "env": {
+          "NODE_ENV": "production",
+          "API_URL": "https://api.fittrackerpro.com",
+          "SENTRY_DSN": "$SENTRY_DSN",
+          "REVENUE_CAT_API_KEY": "$REVENUE_CAT_API_KEY_IOS"
+        }
       },
       "android": {
         "buildType": "release",
         "gradleCommand": ":app:bundleRelease",
-        "autoIncrement": true
+        "autoIncrement": true,
+        "resourceClass": "m-large",
+        "image": "default",
+        "node": "18",
+        "cache": {
+          "disabled": false,
+          "key": "android-production-cache-v1",
+          "paths": [
+            "node_modules",
+            "android/.gradle"
+          ]
+        },
+        "env": {
+          "NODE_ENV": "production",
+          "API_URL": "https://api.fittrackerpro.com",
+          "SENTRY_DSN": "$SENTRY_DSN",
+          "REVENUE_CAT_API_KEY": "$REVENUE_CAT_API_KEY_ANDROID"
+        }
       },
       "env": {
         "NODE_ENV": "production"

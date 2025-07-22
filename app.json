@@ -23,18 +23,38 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.fittrackerpro.app",
       "buildNumber": "1",
-      "infoPlist": {
-        "NSCameraUsageDescription": "FitTracker Pro uses the camera to capture progress photos and scan food barcodes for nutrition tracking.",
-        "NSPhotoLibraryUsageDescription": "FitTracker Pro accesses your photo library to save progress photos and share achievements.",
-        "NSHealthShareUsageDescription": "FitTracker Pro integrates with Apple Health to sync workout data, heart rate, and health metrics for comprehensive fitness tracking.",
-        "NSHealthUpdateUsageDescription": "FitTracker Pro writes workout data to Apple Health to keep your fitness information synchronized across all your health apps.",
-        "NSMotionUsageDescription": "FitTracker Pro uses motion sensors to automatically detect and track your workouts and daily activity.",
-        "NSLocationWhenInUseUsageDescription": "FitTracker Pro uses location to find nearby gyms, track outdoor workouts, and provide location-based fitness recommendations.",
-        "UIBackgroundModes": ["background-processing", "background-fetch"]
-      },
+      "requireFullScreen": false,
+      "associatedDomains": ["applinks:fittrackerpro.com"],
       "config": {
         "usesNonExemptEncryption": false
-      }
+      },
+      "infoPlist": {
+        "NSCameraUsageDescription": "FitTracker Pro uses the camera to capture progress photos, scan food barcodes for nutrition tracking, and analyze your workout form using AI-powered computer vision.",
+        "NSPhotoLibraryUsageDescription": "FitTracker Pro accesses your photo library to save progress photos, share achievements with friends, and import workout videos for analysis.",
+        "NSHealthShareUsageDescription": "FitTracker Pro integrates with Apple Health to sync workout data, heart rate, steps, calories burned, and comprehensive health metrics for personalized fitness tracking and AI-powered recommendations.",
+        "NSHealthUpdateUsageDescription": "FitTracker Pro writes workout data, exercise sessions, heart rate measurements, and fitness achievements to Apple Health to keep your fitness information synchronized across all your health apps.",
+        "NSMotionUsageDescription": "FitTracker Pro uses motion sensors to automatically detect and track your workouts, count repetitions, analyze movement patterns, and provide real-time form feedback during exercises.",
+        "NSLocationWhenInUseUsageDescription": "FitTracker Pro uses location to find nearby gyms, track outdoor workouts like running and cycling, provide location-based fitness recommendations, and connect you with local trainers and fitness communities.",
+        "NSBluetoothAlwaysUsageDescription": "FitTracker Pro connects to Bluetooth fitness devices like heart rate monitors, smart scales, and wearables to sync real-time health data and enhance your workout experience.",
+        "NSBluetoothPeripheralUsageDescription": "FitTracker Pro uses Bluetooth to connect with fitness accessories and share workout data with other devices.",
+        "NSMicrophoneUsageDescription": "FitTracker Pro uses the microphone for voice commands during workouts and AI-powered fitness coaching interactions.",
+        "UIBackgroundModes": ["background-processing", "background-fetch", "background-audio"],
+        "LSApplicationQueriesSchemes": ["instagram", "facebook", "twitter", "strava", "myfitnesspal"],
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAppTransportSecurity": {
+          "NSExceptionDomains": {
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            }
+          }
+        }
+      },
+      "entitlements": {
+        "com.apple.developer.healthkit": true,
+        "com.apple.developer.healthkit.access": ["health-records"],
+        "aps-environment": "production"
+      },
+      "appStoreUrl": "https://apps.apple.com/app/fittracker-pro/id123456789"
     },
     "android": {
       "adaptiveIcon": {
