@@ -11,7 +11,7 @@ interface EmailOptions {
 const createTransporter = () => {
   if (process.env.NODE_ENV === 'production') {
     // Production email service (e.g., SendGrid, Mailgun, AWS SES)
-    return nodemailer.createTransporter({
+    return nodemailer.createTransport({
       service: 'SendGrid',
       auth: {
         user: 'apikey',
@@ -20,7 +20,7 @@ const createTransporter = () => {
     });
   } else {
     // Development - use Mailtrap or similar
-    return nodemailer.createTransporter({
+    return nodemailer.createTransport({
       host: process.env.EMAIL_HOST || 'smtp.mailtrap.io',
       port: parseInt(process.env.EMAIL_PORT || '587'),
       auth: {

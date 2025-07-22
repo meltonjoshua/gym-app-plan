@@ -9,8 +9,8 @@ import { sendEmail } from '@/services/emailService';
 import { getRedisClient } from '@/utils/redis';
 
 const createSendToken = (user: IUser, statusCode: number, res: Response, message: string = 'Success') => {
-  const token = generateToken(user._id.toString());
-  const refreshToken = generateRefreshToken(user._id.toString());
+  const token = generateToken((user._id as string).toString());
+  const refreshToken = generateRefreshToken((user._id as string).toString());
   
   const cookieOptions = {
     expires: new Date(Date.now() + (process.env.JWT_COOKIE_EXPIRES_IN ? parseInt(process.env.JWT_COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000)),
@@ -23,7 +23,7 @@ const createSendToken = (user: IUser, statusCode: number, res: Response, message
   res.cookie('refreshToken', refreshToken, { ...cookieOptions, expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) });
 
   // Remove password from output
-  user.password = undefined;
+  (user as any).password = undefined;
 
   logger.info('User authenticated', {
     userId: user._id,
@@ -332,8 +332,8 @@ export const refreshToken = asyncHandler(async (req: Request, res: Response, nex
     }
 
     // Generate new tokens
-    const newToken = generateToken(user._id.toString());
-    const newRefreshToken = generateRefreshToken(user._id.toString());
+    const newToken = generateToken((user._id as string).toString());
+    const newRefreshToken = generateRefreshToken((user._id as string).toString());
 
     logger.info('Token refreshed', {
       userId: user._id,

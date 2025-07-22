@@ -1,0 +1,7 @@
+{
+  "ignores": [
+    "@typescript-eslint/eslint-plugin",
+    "@types/jest"
+  ],
+  "skip-missing": false
+}

@@ -29,7 +29,7 @@ export const setupSocketHandlers = (io: SocketServer) => {
         return next(new Error('User not found or inactive'));
       }
 
-      socket.userId = user._id.toString();
+      socket.userId = (user._id as string).toString();
       socket.user = user;
       
       logger.debug('Socket authenticated', { 

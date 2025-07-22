@@ -1,9 +1,9 @@
 import { createClient, RedisClientType } from 'redis';
 import { logger } from './logger';
 
-let redisClient: RedisClientType | null = null;
+let redisClient: any = null;
 
-export const connectRedis = async (): Promise<RedisClientType> => {
+export const connectRedis = async (): Promise<any> => {
   try {
     const client = createClient({
       url: process.env.REDIS_URL || 'redis://localhost:6379',
@@ -46,7 +46,7 @@ export const connectRedis = async (): Promise<RedisClientType> => {
   }
 };
 
-export const getRedisClient = (): RedisClientType => {
+export const getRedisClient = (): any => {
   if (!redisClient) {
     throw new Error('Redis client not initialized. Call connectRedis() first.');
   }

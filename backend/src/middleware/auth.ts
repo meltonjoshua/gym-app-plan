@@ -18,7 +18,7 @@ export const generateToken = (userId: string): string => {
     expiresIn: JWT_EXPIRES_IN,
     issuer: 'fittracker-pro',
     audience: 'fittracker-pro-users'
-  });
+  } as jwt.SignOptions);
 };
 
 export const generateRefreshToken = (userId: string): string => {

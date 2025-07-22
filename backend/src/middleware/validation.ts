@@ -7,9 +7,9 @@ export const validateRequest = (req: Request, res: Response, next: NextFunction)
   
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map(error => ({
-      field: error.param,
+      field: (error as any).param,
       message: error.msg,
-      value: error.value
+      value: (error as any).value
     }));
 
     return next(new AppError(`Validation failed: ${errorMessages.map(e => e.message).join(', ')}`, 400));
