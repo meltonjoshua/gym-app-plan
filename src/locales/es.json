@@ -1,0 +1,191 @@
+{
+  "app": {
+    "name": "FitTracker Pro",
+    "tagline": "Tu Compañero Fitness Definitivo",
+    "welcome": "Bienvenido a FitTracker Pro",
+    "loading": "Cargando...",
+    "retry": "Reintentar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "done": "Listo",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "skip": "Omitir",
+    "continue": "Continuar",
+    "close": "Cerrar",
+    "ok": "OK",
+    "yes": "Sí",
+    "no": "No"
+  },
+  
+  "navigation": {
+    "home": "Inicio",
+    "workouts": "Entrenamientos",
+    "progress": "Progreso",
+    "nutrition": "Nutrición",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "back": "Atrás",
+    "menu": "Menú"
+  },
+  
+  "auth": {
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetPassword": "Restablecer Contraseña",
+    "loginWithGoogle": "Iniciar con Google",
+    "loginWithApple": "Iniciar con Apple",
+    "createAccount": "Crear Cuenta",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "termsAndConditions": "Términos y Condiciones",
+    "privacyPolicy": "Política de Privacidad",
+    "agreeToTerms": "Acepto los Términos y Condiciones"
+  },
+  
+  "workouts": {
+    "myWorkouts": "Mis Entrenamientos",
+    "startWorkout": "Comenzar Entrenamiento",
+    "endWorkout": "Finalizar Entrenamiento",
+    "pauseWorkout": "Pausar Entrenamiento",
+    "resumeWorkout": "Reanudar Entrenamiento",
+    "workoutComplete": "¡Entrenamiento Completado!",
+    "greatJob": "¡Excelente trabajo en tu entrenamiento!",
+    "duration": "Duración",
+    "intensity": "Intensidad",
+    "calories": "Calorías",
+    "exercises": "Ejercicios",
+    "sets": "Series",
+    "reps": "Repeticiones",
+    "weight": "Peso"
+  },
+  
+  "exercises": {
+    "squat": "Sentadilla",
+    "deadlift": "Peso Muerto",
+    "benchPress": "Press de Banca",
+    "pullUp": "Dominada",
+    "pushUp": "Flexión",
+    "plank": "Plancha",
+    "burpee": "Burpee",
+    "lunges": "Zancadas",
+    "bicepCurl": "Curl de Bíceps",
+    "shoulderPress": "Press de Hombros"
+  },
+  
+  "muscleGroups": {
+    "chest": "Pecho",
+    "back": "Espalda",
+    "shoulders": "Hombros",
+    "arms": "Brazos",
+    "legs": "Piernas",
+    "glutes": "Glúteos",
+    "core": "Core",
+    "cardio": "Cardio"
+  },
+  
+  "workoutTypes": {
+    "strength": "Entrenamiento de Fuerza",
+    "cardio": "Cardio",
+    "flexibility": "Flexibilidad",
+    "hiit": "HIIT",
+    "yoga": "Yoga",
+    "pilates": "Pilates",
+    "crossfit": "CrossFit",
+    "bodyweight": "Peso Corporal"
+  },
+  
+  "nutrition": {
+    "protein": "Proteína",
+    "carbs": "Carbohidratos",
+    "fat": "Grasa",
+    "fiber": "Fibra",
+    "sugar": "Azúcar",
+    "sodium": "Sodio",
+    "calories": "Calorías"
+  },
+  
+  "meals": {
+    "breakfast": "Desayuno",
+    "lunch": "Almuerzo",
+    "dinner": "Cena",
+    "snack": "Merienda",
+    "preWorkout": "Pre-Entrenamiento",
+    "postWorkout": "Post-Entrenamiento"
+  },
+  
+  "units": {
+    "kg": "kg",
+    "lbs": "lbs",
+    "cm": "cm",
+    "km": "km",
+    "miles": "millas",
+    "minutes": "minutos",
+    "seconds": "segundos",
+    "hours": "horas",
+    "kcal": "kcal"
+  },
+  
+  "errors": {
+    "networkError": "Error de conexión. Por favor verifica tu conexión a internet.",
+    "serverError": "Error del servidor. Inténtalo de nuevo más tarde.",
+    "invalidCredentials": "Email o contraseña inválidos.",
+    "emailAlreadyExists": "Ya existe una cuenta con este email.",
+    "weakPassword": "La contraseña debe tener al menos 8 caracteres."
+  },
+  
+  "success": {
+    "workoutSaved": "¡Entrenamiento guardado exitosamente!",
+    "profileUpdated": "¡Perfil actualizado exitosamente!",
+    "goalReached": "¡Meta alcanzada! ¡Felicitaciones!"
+  },
+  
+  "motivational": {
+    "quotes": [
+      "El único mal entrenamiento es el que no haces.",
+      "Las personas fuertes son más difíciles de matar y más útiles en general.",
+      "El dolor que sientes hoy será la fuerza que sientes mañana.",
+      "No limites tus desafíos, desafía tus límites.",
+      "El éxito no se da. Se gana en el gimnasio."
+    ],
+    "encouragement": [
+      "¡Tú puedes!",
+      "¡Sigue adelante!",
+      "¡Mantente fuerte!",
+      "¡Una repetición más!",
+      "¡Eres increíble!"
+    ]
+  },
+  
+  "days": {
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo"
+  },
+  
+  "months": {
+    "january": "Enero",
+    "february": "Febrero",
+    "march": "Marzo",
+    "april": "Abril",
+    "may": "Mayo",
+    "june": "Junio",
+    "july": "Julio",
+    "august": "Agosto",
+    "september": "Septiembre",
+    "october": "Octubre",
+    "november": "Noviembre",
+    "december": "Diciembre"
+  }
+}
