@@ -17,6 +17,8 @@ import WorkoutSessionScreen from '../screens/workouts/WorkoutSessionScreen';
 import ProgressScreen from '../screens/progress/ProgressScreen';
 import NutritionScreen from '../screens/nutrition/NutritionScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+// Phase 2: Social features
+import SocialScreen from '../screens/social/SocialScreen';
 
 // Navigation types
 export type AuthStackParamList = {
@@ -29,6 +31,7 @@ export type MainTabParamList = {
   Home: undefined;
   Workouts: undefined;
   Progress: undefined;
+  Social: undefined; // Phase 2: Social tab
   Nutrition: undefined;
   Profile: undefined;
 };
@@ -88,6 +91,8 @@ function MainNavigator() {
             iconName = focused ? 'fitness' : 'fitness-outline';
           } else if (route.name === 'Progress') {
             iconName = focused ? 'analytics' : 'analytics-outline';
+          } else if (route.name === 'Social') {
+            iconName = focused ? 'people' : 'people-outline';
           } else if (route.name === 'Nutrition') {
             iconName = focused ? 'restaurant' : 'restaurant-outline';
           } else if (route.name === 'Profile') {
@@ -104,6 +109,7 @@ function MainNavigator() {
       <MainTab.Screen name="Home" component={HomeScreen} />
       <MainTab.Screen name="Workouts" component={WorkoutNavigator} />
       <MainTab.Screen name="Progress" component={ProgressScreen} />
+      <MainTab.Screen name="Social" component={SocialScreen} />
       <MainTab.Screen name="Nutrition" component={NutritionScreen} />
       <MainTab.Screen name="Profile" component={ProfileScreen} />
     </MainTab.Navigator>

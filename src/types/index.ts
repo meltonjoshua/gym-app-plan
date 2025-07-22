@@ -227,6 +227,10 @@ export interface RootState {
   progress: ProgressState;
   nutrition: NutritionState;
   notifications: NotificationState;
+  // Phase 2 states
+  social: SocialState;
+  ai: AIState;
+  wearable: WearableState;
 }
 
 export interface AuthState {
@@ -271,6 +275,197 @@ export interface NutritionState {
 
 export interface NotificationState {
   settings: NotificationSettings;
+  isLoading: boolean;
+  error?: string;
+}
+
+// Social Feature Types (Phase 2)
+export interface SocialUser {
+  id: string;
+  name: string;
+  profilePhoto?: string;
+  fitnessLevel: 'beginner' | 'intermediate' | 'advanced';
+  joinDate: Date;
+  totalWorkouts: number;
+  currentStreak: number;
+  achievements: Achievement[];
+}
+
+export interface Friend {
+  id: string;
+  userId: string;
+  friendId: string;
+  status: 'pending' | 'accepted' | 'blocked';
+  createdDate: Date;
+  acceptedDate?: Date;
+}
+
+export interface FriendRequest {
+  id: string;
+  senderId: string;
+  receiverId: string;
+  senderName: string;
+  senderPhoto?: string;
+  message?: string;
+  status: 'pending' | 'accepted' | 'declined';
+  createdDate: Date;
+}
+
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  iconName: string;
+  iconColor: string;
+  category: 'workout' | 'streak' | 'progress' | 'social' | 'special';
+  unlockedDate?: Date;
+  isUnlocked: boolean;
+  requirement: {
+    type: 'workout_count' | 'streak_days' | 'weight_lifted' | 'friends_count' | 'challenge_wins';
+    value: number;
+  };
+}
+
+export interface Challenge {
+  id: string;
+  title: string;
+  description: string;
+  type: 'workout_count' | 'distance' | 'calories' | 'streak' | 'weight_lifted';
+  targetValue: number;
+  unit: string;
+  startDate: Date;
+  endDate: Date;
+  participants: ChallengeParticipant[];
+  createdBy: string;
+  isPublic: boolean;
+  prize?: string;
+  status: 'upcoming' | 'active' | 'completed' | 'cancelled';
+}
+
+export interface ChallengeParticipant {
+  userId: string;
+  userName: string;
+  userPhoto?: string;
+  currentValue: number;
+  joinDate: Date;
+  rank?: number;
+}
+
+export interface WorkoutShare {
+  id: string;
+  workoutSessionId: string;
+  userId: string;
+  userName: string;
+  userPhoto?: string;
+  workoutName: string;
+  duration: number;
+  completedAt: Date;
+  sharedAt: Date;
+  caption?: string;
+  likes: string[]; // user IDs who liked
+  comments: WorkoutComment[];
+  isPublic: boolean;
+}
+
+export interface WorkoutComment {
+  id: string;
+  userId: string;
+  userName: string;
+  userPhoto?: string;
+  message: string;
+  createdAt: Date;
+}
+
+export interface Leaderboard {
+  id: string;
+  type: 'weekly_workouts' | 'monthly_streak' | 'total_workouts' | 'friends_challenges';
+  title: string;
+  period: 'weekly' | 'monthly' | 'all_time';
+  entries: LeaderboardEntry[];
+  lastUpdated: Date;
+}
+
+export interface LeaderboardEntry {
+  userId: string;
+  userName: string;
+  userPhoto?: string;
+  value: number;
+  rank: number;
+  change: number; // +/- from previous period
+}
+
+// AI Recommendation Types (Phase 2)
+export interface WorkoutRecommendation {
+  id: string;
+  userId: string;
+  recommendationType: 'next_workout' | 'rest_day' | 'progression' | 'variety';
+  workoutPlanId?: string;
+  workoutId?: string;
+  title: string;
+  description: string;
+  reasoning: string[];
+  confidence: number; // 0-1
+  createdAt: Date;
+  isViewed: boolean;
+  isApplied: boolean;
+}
+
+export interface ProgressPrediction {
+  goalId: string;
+  predictedCompletionDate: Date;
+  confidence: number;
+  currentTrajectory: 'on_track' | 'ahead' | 'behind';
+  adjustmentSuggestions: string[];
+}
+
+// Wearable Integration Types (Phase 2 - Simulated)
+export interface WearableData {
+  id: string;
+  userId: string;
+  deviceType: 'smartwatch' | 'fitness_tracker' | 'heart_rate_monitor';
+  deviceName: string;
+  syncTime: Date;
+  data: {
+    heartRate?: number[];
+    steps?: number;
+    calories?: number;
+    activeMinutes?: number;
+    sleepHours?: number;
+    restingHeartRate?: number;
+  };
+}
+
+export interface HeartRateZone {
+  zone: 'resting' | 'fat_burn' | 'cardio' | 'peak';
+  minBpm: number;
+  maxBpm: number;
+  timeInZone: number; // minutes
+  percentage: number;
+}
+
+// Extended State Types for Phase 2
+export interface SocialState {
+  friends: Friend[];
+  friendRequests: FriendRequest[];
+  challenges: Challenge[];
+  workoutShares: WorkoutShare[];
+  leaderboards: Leaderboard[];
+  achievements: Achievement[];
+  isLoading: boolean;
+  error?: string;
+}
+
+export interface AIState {
+  recommendations: WorkoutRecommendation[];
+  predictions: ProgressPrediction[];
+  isLoading: boolean;
+  error?: string;
+}
+
+export interface WearableState {
+  devices: WearableData[];
+  currentHeartRate?: number;
+  todaysData?: WearableData;
   isLoading: boolean;
   error?: string;
 }
