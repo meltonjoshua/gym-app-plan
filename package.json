@@ -48,7 +48,7 @@
     "expo-localization": "^15.0.3",
     "expo-notifications": "^0.31.4",
     "expo-secure-store": "^14.2.3",
-    "expo-sensors": "^13.1.2",
+    "expo-sensors": "^14.1.4",
     "expo-status-bar": "~2.2.3",
     "i18n-js": "^4.4.3",
     "moment": "^2.30.1",

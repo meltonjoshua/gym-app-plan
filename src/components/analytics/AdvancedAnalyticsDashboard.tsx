@@ -457,6 +457,8 @@ export const AdvancedAnalyticsDashboard: React.FC = () => {
             data={strengthGainsData}
             width={screenWidth - 40}
             height={220}
+            yAxisLabel=""
+            yAxisSuffix="kg"
             chartConfig={chartConfig}
             style={styles.chart}
             showValuesOnTopOfBars

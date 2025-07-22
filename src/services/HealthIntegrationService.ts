@@ -128,7 +128,7 @@ export class HealthIntegrationService {
           const fitbitData = await this.syncFromFitbit(dataTypes, startDate, endDate);
           syncResults.push(...fitbitData);
         } catch (error) {
-          errors.push(`Fitbit sync error: ${error.message}`);
+          errors.push(`Fitbit sync error: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
       }
 
@@ -137,7 +137,7 @@ export class HealthIntegrationService {
           const garminData = await this.syncFromGarmin(dataTypes, startDate, endDate);
           syncResults.push(...garminData);
         } catch (error) {
-          errors.push(`Garmin sync error: ${error.message}`);
+          errors.push(`Garmin sync error: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
       }
 
@@ -157,7 +157,7 @@ export class HealthIntegrationService {
         success: false,
         dataPoints: [],
         syncedSources: [],
-        errors: [error.message],
+        errors: [error instanceof Error ? error.message : 'Unknown error'],
         timestamp: Date.now()
       };
     }
@@ -177,7 +177,7 @@ export class HealthIntegrationService {
           await this.writeToAppleHealth(workoutData);
           results.appleHealth = true;
         } catch (error) {
-          errors.push(`Apple Health: ${error.message}`);
+          errors.push(`Apple Health: ${error instanceof Error ? error.message : 'Unknown error'}`);
           results.appleHealth = false;
         }
       }
@@ -188,7 +188,7 @@ export class HealthIntegrationService {
           await this.writeToGoogleFit(workoutData);
           results.googleFit = true;
         } catch (error) {
-          errors.push(`Google Fit: ${error.message}`);
+          errors.push(`Google Fit: ${error instanceof Error ? error.message : 'Unknown error'}`);
           results.googleFit = false;
         }
       }
@@ -203,7 +203,7 @@ export class HealthIntegrationService {
       return {
         success: false,
         results: {},
-        errors: [error.message]
+        errors: [error instanceof Error ? error.message : 'Unknown error']
       };
     }
   }

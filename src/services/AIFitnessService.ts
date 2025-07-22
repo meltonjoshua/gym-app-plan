@@ -1,4 +1,4 @@
-import { Exercise, WorkoutSession, User, NutritionData } from '../types';
+import { Exercise, WorkoutSession, User, NutritionSummary } from '../types';
 
 /**
  * AI-powered fitness recommendation service
@@ -85,7 +85,7 @@ export class AIFitnessService {
   async generateNutritionPlan(
     user: User,
     fitnessGoals: string[],
-    currentNutrition: NutritionData[],
+    currentNutrition: NutritionSummary[],
     workoutSchedule: WorkoutSession[]
   ): Promise<NutritionRecommendation> {
     try {
@@ -352,7 +352,7 @@ export class AIFitnessService {
     };
   }
 
-  private analyzeCurrentNutrition(data: NutritionData[]): any {
+  private analyzeCurrentNutrition(data: NutritionSummary[]): any {
     if (!data.length) return { calories: 0, protein: 0, carbs: 0, fat: 0 };
     
     return data.reduce((totals, day) => ({

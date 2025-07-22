@@ -6,13 +6,28 @@ export interface User {
   age?: number;
   height?: number; // in cm
   weight?: number; // in kg
+  gender?: 'male' | 'female' | 'other';
   fitnessLevel: 'beginner' | 'intermediate' | 'advanced';
   goals: FitnessGoal[];
+  fitnessGoals?: FitnessGoal[];
+  preferences?: UserPreferences;
+  physicalLimitations?: string[];
   preferredWorkoutDays: number;
   preferredWorkoutDuration: number; // in minutes
   profilePhoto?: string;
   joinDate: Date;
   lastLogin: Date;
+}
+
+export interface UserPreferences {
+  workoutTypes?: string[];
+  equipmentAccess?: string[];
+  workoutLocation?: 'home' | 'gym' | 'outdoor' | 'any';
+  notifications?: {
+    workoutReminders: boolean;
+    progressUpdates: boolean;
+    socialUpdates: boolean;
+  };
 }
 
 export interface FitnessGoal {
@@ -122,6 +137,9 @@ export interface WorkoutSession {
   userId: string;
   startTime: Date;
   endTime?: Date;
+  date: Date;
+  intensity?: number; // 1-10 scale
+  exercises?: WorkoutExercise[];
   isCompleted: boolean;
   completedExercises: CompletedExercise[];
   notes?: string;
