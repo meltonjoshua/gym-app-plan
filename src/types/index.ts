@@ -469,3 +469,440 @@ export interface WearableState {
   isLoading: boolean;
   error?: string;
 }
+
+// Phase 3: Virtual Personal Trainer Types
+export interface AITrainer {
+  id: string;
+  name: string;
+  personality: 'motivational' | 'analytical' | 'supportive' | 'challenging';
+  specialties: TrainerSpecialty[];
+  certifications: string[];
+  profilePhoto?: string;
+  bio: string;
+  experience: number; // years
+  rating: number;
+  clientCount: number;
+}
+
+export type TrainerSpecialty = 
+  | 'weight_loss'
+  | 'muscle_building'
+  | 'endurance'
+  | 'strength'
+  | 'flexibility'
+  | 'rehabilitation'
+  | 'senior_fitness'
+  | 'youth_fitness';
+
+export interface TrainerChat {
+  id: string;
+  userId: string;
+  trainerId: string;
+  messages: TrainerMessage[];
+  status: 'active' | 'completed' | 'paused';
+  createdAt: Date;
+  lastMessageAt: Date;
+}
+
+export interface TrainerMessage {
+  id: string;
+  senderId: string; // userId or trainerId
+  senderType: 'user' | 'ai_trainer' | 'human_trainer';
+  message: string;
+  messageType: 'text' | 'workout_plan' | 'form_feedback' | 'progress_analysis';
+  timestamp: Date;
+  metadata?: {
+    workoutId?: string;
+    exerciseId?: string;
+    formScore?: number;
+    suggestions?: string[];
+  };
+}
+
+export interface FormAnalysis {
+  exerciseId: string;
+  videoUrl?: string;
+  analysisTimestamp: Date;
+  overallScore: number; // 0-100
+  feedback: FormFeedback[];
+  suggestions: string[];
+  riskLevel: 'low' | 'medium' | 'high';
+}
+
+export interface FormFeedback {
+  aspect: 'posture' | 'range_of_motion' | 'timing' | 'breathing' | 'balance';
+  score: number; // 0-100
+  feedback: string;
+  correctionSuggestion: string;
+}
+
+export interface WorkoutCoaching {
+  workoutSessionId: string;
+  trainerId: string;
+  realTimeGuidance: CoachingGuidance[];
+  adaptations: WorkoutAdaptation[];
+  motivationalMessages: string[];
+  progressNotes: string;
+}
+
+export interface CoachingGuidance {
+  exerciseId: string;
+  setNumber: number;
+  guidanceType: 'form_tip' | 'motivation' | 'rest_adjustment' | 'weight_adjustment';
+  message: string;
+  priority: 'low' | 'medium' | 'high';
+}
+
+export interface WorkoutAdaptation {
+  exerciseId: string;
+  adaptationType: 'weight_increase' | 'weight_decrease' | 'rep_adjustment' | 'rest_adjustment' | 'exercise_substitution';
+  originalValue: number;
+  adaptedValue: number;
+  reason: string;
+}
+
+// Phase 3: Trainer Marketplace Types
+export interface HumanTrainer {
+  id: string;
+  name: string;
+  profilePhoto?: string;
+  bio: string;
+  specialties: TrainerSpecialty[];
+  certifications: TrainerCertification[];
+  experience: number; // years
+  rating: number;
+  reviewCount: number;
+  hourlyRate: number;
+  location?: {
+    city: string;
+    state: string;
+    country: string;
+    isOnlineOnly: boolean;
+  };
+  availability: TrainerAvailability[];
+  languages: string[];
+  isVerified: boolean;
+  joinDate: Date;
+}
+
+export interface TrainerCertification {
+  name: string;
+  organization: string;
+  certificationDate: Date;
+  expiryDate?: Date;
+  credentialId?: string;
+  isVerified: boolean;
+}
+
+export interface TrainerAvailability {
+  dayOfWeek: number; // 0-6 (Sunday-Saturday)
+  timeSlots: TimeSlot[];
+  timezone: string;
+}
+
+export interface TimeSlot {
+  startTime: string; // HH:MM format
+  endTime: string; // HH:MM format
+  isBooked?: boolean;
+}
+
+export interface TrainerBooking {
+  id: string;
+  clientId: string;
+  trainerId: string;
+  sessionDate: Date;
+  startTime: string;
+  duration: number; // minutes
+  sessionType: 'consultation' | 'workout' | 'nutrition' | 'assessment';
+  status: 'scheduled' | 'completed' | 'cancelled' | 'no_show';
+  totalCost: number;
+  paymentStatus: 'pending' | 'paid' | 'refunded';
+  notes?: string;
+  createdAt: Date;
+}
+
+export interface TrainerReview {
+  id: string;
+  clientId: string;
+  trainerId: string;
+  bookingId: string;
+  rating: number; // 1-5
+  review: string;
+  reviewDate: Date;
+  trainerResponse?: string;
+  isVerified: boolean;
+}
+
+// Phase 3: Enhanced Community Types
+export interface FitnessGroup {
+  id: string;
+  name: string;
+  description: string;
+  groupType: 'public' | 'private' | 'invite_only';
+  category: 'general' | 'weight_loss' | 'muscle_building' | 'running' | 'yoga' | 'crossfit' | 'bodybuilding';
+  members: GroupMember[];
+  admins: string[]; // user IDs
+  createdBy: string;
+  createdAt: Date;
+  memberLimit?: number;
+  joinRequirements?: string[];
+  groupPhoto?: string;
+  tags: string[];
+  isActive: boolean;
+}
+
+export interface GroupMember {
+  userId: string;
+  joinDate: Date;
+  role: 'member' | 'moderator' | 'admin';
+  isActive: boolean;
+}
+
+export interface GroupEvent {
+  id: string;
+  groupId: string;
+  title: string;
+  description: string;
+  eventType: 'group_workout' | 'challenge' | 'meetup' | 'workshop' | 'competition';
+  startDate: Date;
+  endDate: Date;
+  location?: {
+    type: 'online' | 'physical';
+    address?: string;
+    virtualLink?: string;
+  };
+  capacity?: number;
+  participants: EventParticipant[];
+  requirements?: string[];
+  cost?: number;
+  createdBy: string;
+  createdAt: Date;
+  status: 'upcoming' | 'active' | 'completed' | 'cancelled';
+}
+
+export interface EventParticipant {
+  userId: string;
+  joinDate: Date;
+  status: 'registered' | 'attended' | 'no_show' | 'cancelled';
+  notes?: string;
+}
+
+export interface LiveWorkoutStream {
+  id: string;
+  hostId: string;
+  title: string;
+  description: string;
+  workoutId: string;
+  startTime: Date;
+  estimatedDuration: number;
+  viewerCount: number;
+  isLive: boolean;
+  streamUrl?: string;
+  chatMessages: StreamChatMessage[];
+  participants: StreamParticipant[];
+  tags: string[];
+}
+
+export interface StreamChatMessage {
+  id: string;
+  userId: string;
+  userName: string;
+  message: string;
+  timestamp: Date;
+  messageType: 'chat' | 'system' | 'exercise_tip';
+}
+
+export interface StreamParticipant {
+  userId: string;
+  joinTime: Date;
+  isFollowingAlong: boolean;
+  currentExercise?: string;
+}
+
+// Phase 3: Advanced Nutrition AI Types
+export interface NutritionAI {
+  id: string;
+  name: string;
+  personality: 'scientific' | 'holistic' | 'performance_focused' | 'weight_management';
+  specialties: NutritionSpecialty[];
+  profilePhoto?: string;
+  bio: string;
+}
+
+export type NutritionSpecialty = 
+  | 'weight_loss'
+  | 'muscle_building'
+  | 'sports_nutrition'
+  | 'plant_based'
+  | 'keto'
+  | 'mediterranean'
+  | 'diabetic_friendly'
+  | 'heart_healthy'
+  | 'allergen_free';
+
+export interface SmartMealPlan {
+  id: string;
+  userId: string;
+  createdBy: string; // AI nutritionist ID
+  name: string;
+  duration: number; // days
+  goals: NutritionGoal[];
+  restrictions: DietaryRestriction[];
+  meals: PlannedMeal[];
+  nutritionSummary: NutritionSummary;
+  groceryList: GroceryItem[];
+  estimatedCost: number;
+  createdAt: Date;
+  isActive: boolean;
+}
+
+export interface NutritionGoal {
+  type: 'calories' | 'protein' | 'carbs' | 'fat' | 'fiber' | 'custom';
+  targetValue: number;
+  unit: string;
+  priority: 'high' | 'medium' | 'low';
+}
+
+export interface DietaryRestriction {
+  type: 'allergy' | 'intolerance' | 'preference' | 'medical';
+  name: string;
+  severity: 'mild' | 'moderate' | 'severe';
+  alternatives?: string[];
+}
+
+export interface PlannedMeal {
+  id: string;
+  dayNumber: number;
+  mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack';
+  recipe: Recipe;
+  servings: number;
+  prepTime: number;
+  cookTime: number;
+  nutritionInfo: NutritionSummary;
+}
+
+export interface Recipe {
+  id: string;
+  name: string;
+  description: string;
+  ingredients: RecipeIngredient[];
+  instructions: string[];
+  difficulty: 'easy' | 'medium' | 'hard';
+  cuisineType: string;
+  dietaryTags: string[];
+  imageUrl?: string;
+  servings: number;
+  nutritionPer100g: NutritionSummary;
+}
+
+export interface RecipeIngredient {
+  foodId: string;
+  quantity: number;
+  unit: string;
+  isOptional: boolean;
+  substitutes?: string[];
+}
+
+export interface NutritionSummary {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fiber: number;
+  sugar: number;
+  sodium: number;
+  vitamins?: { [key: string]: number };
+  minerals?: { [key: string]: number };
+}
+
+export interface GroceryItem {
+  foodId: string;
+  name: string;
+  category: string;
+  quantity: number;
+  unit: string;
+  estimatedCost: number;
+  isOptional: boolean;
+  alternatives?: string[];
+}
+
+export interface FoodAnalysis {
+  imageUrl: string;
+  analysisDate: Date;
+  identifiedFoods: IdentifiedFood[];
+  confidence: number;
+  nutritionEstimate: NutritionSummary;
+  suggestions: string[];
+}
+
+export interface IdentifiedFood {
+  name: string;
+  confidence: number;
+  estimatedQuantity: number;
+  unit: string;
+  nutritionPer100g: NutritionSummary;
+}
+
+export interface NutritionChat {
+  id: string;
+  userId: string;
+  nutritionistId: string;
+  messages: NutritionMessage[];
+  status: 'active' | 'completed' | 'paused';
+  createdAt: Date;
+  lastMessageAt: Date;
+}
+
+export interface NutritionMessage {
+  id: string;
+  senderId: string;
+  senderType: 'user' | 'ai_nutritionist';
+  message: string;
+  messageType: 'text' | 'meal_plan' | 'food_analysis' | 'nutrition_advice';
+  timestamp: Date;
+  metadata?: {
+    mealPlanId?: string;
+    foodAnalysisId?: string;
+    nutritionGoals?: NutritionGoal[];
+  };
+}
+
+// Extended State Types for Phase 3
+export interface VirtualTrainerState {
+  aiTrainer?: AITrainer;
+  chats: TrainerChat[];
+  currentSession?: WorkoutCoaching;
+  formAnalyses: FormAnalysis[];
+  isLoading: boolean;
+  error?: string;
+}
+
+export interface TrainerMarketplaceState {
+  trainers: HumanTrainer[];
+  bookings: TrainerBooking[];
+  reviews: TrainerReview[];
+  searchFilters: {
+    specialties: TrainerSpecialty[];
+    maxRate: number;
+    location?: string;
+    availability?: string;
+  };
+  isLoading: boolean;
+  error?: string;
+}
+
+export interface CommunityState extends SocialState {
+  groups: FitnessGroup[];
+  events: GroupEvent[];
+  liveStreams: LiveWorkoutStream[];
+  currentStream?: LiveWorkoutStream;
+}
+
+export interface AdvancedNutritionState extends NutritionState {
+  aiNutritionist?: NutritionAI;
+  mealPlans: SmartMealPlan[];
+  nutritionChats: NutritionChat[];
+  foodAnalyses: FoodAnalysis[];
+  recipes: Recipe[];
+  groceryLists: GroceryItem[][];
+}

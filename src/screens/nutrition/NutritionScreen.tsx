@@ -13,7 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
-export default function NutritionScreen() {
+export default function NutritionScreen({ navigation }: any) {
   const { dailyGoals } = useSelector((state: RootState) => state.nutrition);
   const [selectedMeal, setSelectedMeal] = useState('breakfast');
   const [searchQuery, setSearchQuery] = useState('');
@@ -207,6 +207,14 @@ export default function NutritionScreen() {
         <TouchableOpacity style={styles.actionButton}>
           <Ionicons name="water" size={24} color="#667eea" />
           <Text style={styles.actionButtonText}>Log Water Intake</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={styles.actionButton} 
+          onPress={() => navigation.navigate('AdvancedNutrition')}
+        >
+          <Ionicons name="nutrition" size={24} color="#4CAF50" />
+          <Text style={styles.actionButtonText}>AI Nutritionist</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.actionButton}>

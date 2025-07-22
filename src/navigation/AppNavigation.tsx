@@ -23,6 +23,12 @@ import SocialScreen from '../screens/social/SocialScreen';
 import AIInsightsScreen from '../screens/main/AIInsightsScreen';
 // Phase 2: Wearable integration
 import WearableDevicesScreen from '../screens/wearables/WearableDevicesScreen';
+// Phase 3: Virtual Trainer
+import VirtualTrainerScreen from '../screens/main/VirtualTrainerScreen';
+// Phase 3: Trainer Marketplace
+import TrainerMarketplaceScreen from '../screens/marketplace/TrainerMarketplaceScreen';
+// Phase 3: Enhanced Nutrition
+import AdvancedNutritionScreen from '../screens/nutrition/AdvancedNutritionScreen';
 
 // Navigation types
 export type AuthStackParamList = {
@@ -43,11 +49,18 @@ export type MainTabParamList = {
 export type HomeStackParamList = {
   HomeMain: undefined;
   AIInsights: undefined;
+  VirtualTrainer: undefined; // Phase 3: Virtual Trainer
 };
 
 export type ProfileStackParamList = {
   ProfileMain: undefined;
   WearableDevices: undefined;
+  TrainerMarketplace: undefined; // Phase 3: Trainer Marketplace
+};
+
+export type NutritionStackParamList = {
+  NutritionMain: undefined;
+  AdvancedNutrition: undefined; // Phase 3: Enhanced Nutrition AI
 };
 
 export type WorkoutStackParamList = {
@@ -60,6 +73,7 @@ const AuthStack = createStackNavigator<AuthStackParamList>();
 const MainTab = createBottomTabNavigator<MainTabParamList>();
 const HomeStack = createStackNavigator<HomeStackParamList>(); // Phase 2: Home stack
 const ProfileStack = createStackNavigator<ProfileStackParamList>(); // Phase 2: Profile stack
+const NutritionStack = createStackNavigator<NutritionStackParamList>(); // Phase 3: Nutrition stack
 const WorkoutStack = createStackNavigator<WorkoutStackParamList>();
 
 function HomeNavigator() {
@@ -73,6 +87,11 @@ function HomeNavigator() {
       <HomeStack.Screen 
         name="AIInsights" 
         component={AIInsightsScreen}
+        options={{ headerShown: false }}
+      />
+      <HomeStack.Screen 
+        name="VirtualTrainer" 
+        component={VirtualTrainerScreen}
         options={{ headerShown: false }}
       />
     </HomeStack.Navigator>
@@ -92,7 +111,29 @@ function ProfileNavigator() {
         component={WearableDevicesScreen}
         options={{ headerShown: false }}
       />
+      <ProfileStack.Screen 
+        name="TrainerMarketplace" 
+        component={TrainerMarketplaceScreen}
+        options={{ headerShown: false }}
+      />
     </ProfileStack.Navigator>
+  );
+}
+
+function NutritionNavigator() {
+  return (
+    <NutritionStack.Navigator>
+      <NutritionStack.Screen 
+        name="NutritionMain" 
+        component={NutritionScreen}
+        options={{ headerShown: false }}
+      />
+      <NutritionStack.Screen 
+        name="AdvancedNutrition" 
+        component={AdvancedNutritionScreen}
+        options={{ headerShown: false }}
+      />
+    </NutritionStack.Navigator>
   );
 }
 
@@ -160,7 +201,7 @@ function MainNavigator() {
       <MainTab.Screen name="Workouts" component={WorkoutNavigator} />
       <MainTab.Screen name="Progress" component={ProgressScreen} />
       <MainTab.Screen name="Social" component={SocialScreen} />
-      <MainTab.Screen name="Nutrition" component={NutritionScreen} />
+      <MainTab.Screen name="Nutrition" component={NutritionNavigator} />
       <MainTab.Screen name="Profile" component={ProfileNavigator} />
     </MainTab.Navigator>
   );

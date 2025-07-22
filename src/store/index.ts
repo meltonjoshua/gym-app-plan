@@ -9,6 +9,10 @@ import notificationReducer from './slices/notificationSlice';
 import socialReducer from './slices/socialSlice';
 import aiReducer from './slices/aiSlice';
 import wearableReducer from './slices/wearableSlice';
+// Phase 3 reducers
+import virtualTrainerReducer from './slices/virtualTrainerSlice';
+import trainerMarketplaceReducer from './slices/trainerMarketplaceSlice';
+import advancedNutritionReducer from './slices/advancedNutritionSlice';
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +26,10 @@ export const store = configureStore({
     social: socialReducer,
     ai: aiReducer,
     wearable: wearableReducer,
+    // Phase 3 reducers
+    virtualTrainer: virtualTrainerReducer,
+    trainerMarketplace: trainerMarketplaceReducer,
+    advancedNutrition: advancedNutritionReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
