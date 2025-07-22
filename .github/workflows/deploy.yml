@@ -1,0 +1,348 @@
+# FitTracker Pro - Production Deployment Pipeline
+name: Production Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: fittrackerpro/backend
+  AWS_REGION: us-east-1
+  EKS_CLUSTER_NAME: fittracker-prod
+
+jobs:
+  # Security and Quality Checks
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Run ESLint
+        run: |
+          cd backend
+          npm run lint
+
+      - name: Run Security Audit
+        run: |
+          cd backend
+          npm audit --audit-level moderate
+
+      - name: SAST Scan with CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: typescript, javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+      - name: Run Snyk Security Test
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+          command: test
+
+  # Unit and Integration Tests
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:7.0
+        env:
+          MONGO_INITDB_ROOT_USERNAME: test
+          MONGO_INITDB_ROOT_PASSWORD: test123
+        ports:
+          - 27017:27017
+      redis:
+        image: redis:7.2-alpine
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Run unit tests
+        run: |
+          cd backend
+          npm run test:unit
+        env:
+          NODE_ENV: test
+          MONGODB_URI: mongodb://test:test123@localhost:27017/fittracker_test?authSource=admin
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: test-secret-key
+          JWT_REFRESH_SECRET: test-refresh-secret-key
+
+      - name: Run integration tests
+        run: |
+          cd backend
+          npm run test:integration
+        env:
+          NODE_ENV: test
+          MONGODB_URI: mongodb://test:test123@localhost:27017/fittracker_test?authSource=admin
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: test-secret-key
+          JWT_REFRESH_SECRET: test-refresh-secret-key
+
+      - name: Generate test coverage
+        run: |
+          cd backend
+          npm run test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./backend/coverage/lcov.info
+          flags: backend
+          name: backend-coverage
+
+  # Build and Push Docker Image
+  build:
+    name: Build and Push
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+      image-digest: ${{ steps.build.outputs.digest }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha,prefix={{branch}}-
+
+      - name: Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.prod
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Deploy to Production
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: production
+      url: https://api.fittrackerpro.com
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.28.0'
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: '3.13.0'
+
+      - name: Create namespace if not exists
+        run: |
+          kubectl create namespace fittracker-prod --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Apply Kubernetes secrets
+        run: |
+          kubectl create secret generic fittracker-secrets \
+            --from-literal=mongodb-uri="${{ secrets.MONGODB_URI }}" \
+            --from-literal=mongodb-root-username="${{ secrets.MONGODB_ROOT_USERNAME }}" \
+            --from-literal=mongodb-root-password="${{ secrets.MONGODB_ROOT_PASSWORD }}" \
+            --from-literal=redis-url="${{ secrets.REDIS_URL }}" \
+            --from-literal=redis-password="${{ secrets.REDIS_PASSWORD }}" \
+            --from-literal=jwt-secret="${{ secrets.JWT_SECRET }}" \
+            --from-literal=jwt-refresh-secret="${{ secrets.JWT_REFRESH_SECRET }}" \
+            --from-literal=stripe-secret-key="${{ secrets.STRIPE_SECRET_KEY }}" \
+            --from-literal=revenue-cat-secret="${{ secrets.REVENUE_CAT_SECRET }}" \
+            --namespace=fittracker-prod \
+            --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Apply ConfigMap
+        run: |
+          kubectl create configmap fittracker-config \
+            --from-literal=sentry-dsn="${{ secrets.SENTRY_DSN }}" \
+            --from-literal=api-base-url="https://api.fittrackerpro.com" \
+            --from-literal=cors-origin="https://fittrackerpro.com" \
+            --namespace=fittracker-prod \
+            --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Update deployment image
+        run: |
+          kubectl set image deployment/fittracker-backend \
+            backend=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.image-tag }} \
+            --namespace=fittracker-prod
+
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -f k8s/ --namespace=fittracker-prod
+
+      - name: Wait for deployment rollout
+        run: |
+          kubectl rollout status deployment/fittracker-backend --namespace=fittracker-prod --timeout=600s
+
+      - name: Run smoke tests
+        run: |
+          ./scripts/smoke-tests.sh https://api.fittrackerpro.com
+
+      - name: Notify Slack on success
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          channel: '#deployments'
+          text: '🚀 FitTracker Pro backend deployed successfully to production!'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          channel: '#deployments'
+          text: '❌ FitTracker Pro backend deployment to production failed!'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # Rollback Job (Manual Trigger)
+  rollback:
+    name: Rollback Deployment
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.28.0'
+
+      - name: Rollback deployment
+        run: |
+          kubectl rollout undo deployment/fittracker-backend --namespace=fittracker-prod
+
+      - name: Wait for rollback completion
+        run: |
+          kubectl rollout status deployment/fittracker-backend --namespace=fittracker-prod --timeout=300s
+
+      - name: Notify Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          custom_payload: |
+            {
+              text: "🔄 FitTracker Pro backend rolled back to previous version",
+              channel: "#deployments"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

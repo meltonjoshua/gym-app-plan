@@ -64,6 +64,13 @@
       "edgeToEdgeEnabled": true,
       "package": "com.fittrackerpro.app",
       "versionCode": 1,
+      "compileSdkVersion": 34,
+      "targetSdkVersion": 34,
+      "minSdkVersion": 26,
+      "buildToolsVersion": "34.0.0",
+      "allowBackup": false,
+      "requestLegacyExternalStorage": false,
+      "usesCleartextTraffic": false,
       "permissions": [
         "CAMERA",
         "READ_EXTERNAL_STORAGE",
@@ -76,8 +83,44 @@
         "ACCESS_NETWORK_STATE",
         "WAKE_LOCK",
         "VIBRATE",
-        "RECEIVE_BOOT_COMPLETED"
-      ]
+        "RECEIVE_BOOT_COMPLETED",
+        "BLUETOOTH",
+        "BLUETOOTH_ADMIN",
+        "BLUETOOTH_CONNECT",
+        "RECORD_AUDIO",
+        "FOREGROUND_SERVICE",
+        "ACCESS_BACKGROUND_LOCATION"
+      ],
+      "blockedPermissions": [
+        "ACCESS_LOCATION_EXTRA_COMMANDS",
+        "READ_PHONE_STATE"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "fittrackerpro.com"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ],
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.fittrackerpro.app",
+      "config": {
+        "googleMaps": {
+          "apiKey": "GOOGLE_MAPS_API_KEY_ANDROID"
+        },
+        "googleSignIn": {
+          "apiKey": "GOOGLE_SIGNIN_API_KEY_ANDROID",
+          "certificateHash": "GOOGLE_SIGNIN_CERTIFICATE_HASH"
+        }
+      },
+      "softwareKeyboardLayoutMode": "pan"
     },
     "web": {
       "favicon": "./assets/favicon.png",

@@ -45,6 +45,8 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+        // Performance optimization: check only on smaller state changes
+        warnAfter: 64, // Increase threshold to 64ms
         // Ignore specific paths that contain non-serializable data like Date objects
         ignoredActionsPaths: [
           'payload.createdAt', 
@@ -70,9 +72,13 @@ export const store = configureStore({
           'payload.0.acceptedDate',
           'payload.0.joinDate',
           'payload.0.certifications.0.certificationDate',
+          'payload.0.certifications.1.certificationDate',
+          'payload.0.certifications.2.certificationDate',
           'payload.1.createdAt',
           'payload.1.startDate',
-          'payload.1.endDate'
+          'payload.1.endDate',
+          'payload.1.certifications.0.certificationDate',
+          'payload.1.certifications.1.certificationDate'
         ],
         ignoredPaths: [
           // Social slice date paths
@@ -88,9 +94,16 @@ export const store = configureStore({
           // AI slice date paths
           'ai.recommendations.0.createdAt',
           'ai.recommendations.1.createdAt',
-          // Trainer marketplace date paths
+          // Trainer marketplace date paths (multiple certification dates)
           'trainerMarketplace.trainers.0.certifications.0.certificationDate',
+          'trainerMarketplace.trainers.0.certifications.1.certificationDate',
+          'trainerMarketplace.trainers.0.certifications.2.certificationDate',
+          'trainerMarketplace.trainers.0.joinDate',
           'trainerMarketplace.trainers.1.certifications.0.certificationDate',
+          'trainerMarketplace.trainers.1.certifications.1.certificationDate',
+          'trainerMarketplace.trainers.1.joinDate',
+          'trainerMarketplace.trainers.2.certifications.0.certificationDate',
+          'trainerMarketplace.trainers.2.joinDate',
           // Quantum AI date paths
           'quantumAI.consciousness.lastThought',
           'quantumAI.consciousness.experiences',

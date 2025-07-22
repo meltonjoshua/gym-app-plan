@@ -1,0 +1,82 @@
+# FitTracker Pro - Production Dockerfile
+# Multi-stage build for optimized production deployment
+
+# Build stage
+FROM node:18-alpine AS builder
+
+# Install build dependencies
+RUN apk add --no-cache python3 make g++
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY backend/package*.json ./
+COPY backend/tsconfig.json ./
+
+# Install production dependencies only
+RUN npm ci --only=production && npm cache clean --force
+
+# Copy source code
+COPY backend/src ./src
+
+# Build the application
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine AS production
+
+# Create app user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S backend -u 1001
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY backend/package*.json ./
+
+# Install production dependencies
+RUN npm ci --only=production && \
+    npm cache clean --force && \
+    rm -rf /tmp/*
+
+# Copy built application from builder stage
+COPY --from=builder --chown=backend:nodejs /app/dist ./dist
+
+# Copy necessary files
+COPY --chown=backend:nodejs backend/src/utils/logger.ts ./src/utils/
+COPY --chown=backend:nodejs backend/src/config ./src/config
+
+# Create necessary directories
+RUN mkdir -p logs uploads && \
+    chown -R backend:nodejs logs uploads
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV LOG_LEVEL=info
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3000/api/health || exit 1
+
+# Install curl for health check
+RUN apk add --no-cache curl
+
+# Switch to non-root user
+USER backend
+
+# Expose port
+EXPOSE 3000
+
+# Start the application
+CMD ["node", "dist/server.js"]
+
+# Labels for metadata
+LABEL maintainer="joshua.melton@fittrackerpro.com"
+LABEL version="1.0.0"
+LABEL description="FitTracker Pro Backend - Production Docker Image"
+LABEL org.opencontainers.image.source="https://github.com/meltonjoshua/gym-app-plan"
+LABEL org.opencontainers.image.documentation="https://github.com/meltonjoshua/gym-app-plan/blob/main/README.md"
+LABEL org.opencontainers.image.licenses="MIT"

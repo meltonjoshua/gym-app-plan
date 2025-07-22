@@ -1,0 +1,197 @@
+# FitTracker Pro - Kubernetes Storage Configuration
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fittracker-mongodb-pv
+  labels:
+    app: fittracker-mongodb
+    component: database-storage
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: fast-ssd
+  awsElasticBlockStore:
+    volumeID: ${AWS_EBS_VOLUME_ID_MONGODB}
+    fsType: ext4
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/arch
+          operator: In
+          values:
+          - amd64
+
+---
+# MongoDB PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fittracker-mongodb-pvc
+  labels:
+    app: fittracker-mongodb
+    component: database-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: fast-ssd
+  selector:
+    matchLabels:
+      app: fittracker-mongodb
+
+---
+# Redis PV
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fittracker-redis-pv
+  labels:
+    app: fittracker-redis
+    component: cache-storage
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: fast-ssd
+  awsElasticBlockStore:
+    volumeID: ${AWS_EBS_VOLUME_ID_REDIS}
+    fsType: ext4
+
+---
+# Redis PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fittracker-redis-pvc
+  labels:
+    app: fittracker-redis
+    component: cache-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: fast-ssd
+  selector:
+    matchLabels:
+      app: fittracker-redis
+
+---
+# App Uploads PV
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fittracker-uploads-pv
+  labels:
+    app: fittracker-backend
+    component: uploads-storage
+spec:
+  capacity:
+    storage: 200Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-storage
+  nfs:
+    server: ${AWS_EFS_DNS_NAME}
+    path: /uploads
+
+---
+# App Uploads PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fittracker-uploads-pvc
+  labels:
+    app: fittracker-backend
+    component: uploads-storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Gi
+  storageClassName: efs-storage
+
+---
+# App Logs PV
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fittracker-logs-pv
+  labels:
+    app: fittracker-backend
+    component: logs-storage
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-storage
+  nfs:
+    server: ${AWS_EFS_DNS_NAME}
+    path: /logs
+
+---
+# App Logs PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fittracker-logs-pvc
+  labels:
+    app: fittracker-backend
+    component: logs-storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: efs-storage
+
+---
+# Storage Classes
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-ssd
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp3
+  iops: "3000"
+  throughput: "125"
+  encrypted: "true"
+  kmsKeyId: ${AWS_KMS_KEY_ID}
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-storage
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: ${AWS_EFS_FILE_SYSTEM_ID}
+  directoryPerms: "0755"
+  gidRangeStart: "1000"
+  gidRangeEnd: "2000"
+  basePath: "/dynamic_provisioning"
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
