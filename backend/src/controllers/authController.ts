@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 import { User, IUser } from '@/models/User';
 import { AppError, asyncHandler } from '@/middleware/errorHandler';
 import { generateToken, generateRefreshToken, blacklistToken, AuthenticatedRequest } from '@/middleware/auth';
