@@ -136,6 +136,12 @@ export default function ProfileScreen({ navigation }: any) {
           onPress={() => navigation.navigate('WearableDevices')}
         />
         <ProfileItem
+          icon="people"
+          title="Trainer Marketplace"
+          subtitle="Find and book certified trainers"
+          onPress={() => navigation.navigate('TrainerMarketplace')}
+        />
+        <ProfileItem
           icon="time"
           title="Workout Reminders"
           subtitle="Set reminders for your workouts"

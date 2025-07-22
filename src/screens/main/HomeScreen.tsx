@@ -217,6 +217,13 @@ export default function HomeScreen({ navigation }: any) {
             onPress={() => navigation.navigate('Nutrition')}
           />
           <QuickActionCard
+            title="AI Trainer"
+            description="Get personalized coaching"
+            icon="person"
+            color="#667eea"
+            onPress={() => navigation.navigate('VirtualTrainer')}
+          />
+          <QuickActionCard
             title="View Plans"
             description="Explore workout programs"
             icon="list"
