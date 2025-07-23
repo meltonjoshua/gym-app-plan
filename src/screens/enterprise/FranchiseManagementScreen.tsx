@@ -319,6 +319,8 @@ const FranchiseManagementScreen: React.FC = () => {
                 data={locationPerformanceData}
                 width={width - 40}
                 height={200}
+                yAxisLabel=""
+                yAxisSuffix="K"
                 chartConfig={{
                   backgroundColor: 'transparent',
                   backgroundGradientFrom: '#fff',

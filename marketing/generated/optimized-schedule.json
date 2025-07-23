@@ -1,0 +1,80 @@
+{
+  "instagram": {
+    "optimalTimes": [
+      "17:00",
+      "19:00"
+    ],
+    "contentMix": {
+      "workout": 0.4,
+      "nutrition": 0.3,
+      "motivation": 0.3
+    },
+    "frequency": "daily",
+    "confidence": 85
+  },
+  "facebook": {
+    "optimalTimes": [
+      "17:00",
+      "19:00"
+    ],
+    "contentMix": {
+      "workout": 0.4,
+      "nutrition": 0.3,
+      "motivation": 0.3
+    },
+    "frequency": "daily",
+    "confidence": 85
+  },
+  "twitter": {
+    "optimalTimes": [
+      "17:00",
+      "19:00"
+    ],
+    "contentMix": {
+      "workout": 0.4,
+      "nutrition": 0.3,
+      "motivation": 0.3
+    },
+    "frequency": "daily",
+    "confidence": 85
+  },
+  "tiktok": {
+    "optimalTimes": [
+      "17:00",
+      "19:00"
+    ],
+    "contentMix": {
+      "workout": 0.4,
+      "nutrition": 0.3,
+      "motivation": 0.3
+    },
+    "frequency": "daily",
+    "confidence": 85
+  },
+  "youtube": {
+    "optimalTimes": [
+      "17:00",
+      "19:00"
+    ],
+    "contentMix": {
+      "workout": 0.4,
+      "nutrition": 0.3,
+      "motivation": 0.3
+    },
+    "frequency": "daily",
+    "confidence": 85
+  },
+  "linkedin": {
+    "optimalTimes": [
+      "17:00",
+      "19:00"
+    ],
+    "contentMix": {
+      "workout": 0.4,
+      "nutrition": 0.3,
+      "motivation": 0.3
+    },
+    "frequency": "daily",
+    "confidence": 85
+  }
+}

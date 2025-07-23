@@ -36,13 +36,13 @@ fi
 
 # Check project configuration
 echo -e "${YELLOW}📋 Validating project configuration...${NC}"
-if [ ! -f "eas.json" ]; then
-    echo -e "${RED}❌ eas.json not found. Please configure EAS first.${NC}"
+if [ ! -f "config/eas.json" ]; then
+    echo -e "${RED}❌ config/eas.json not found. Please configure EAS first.${NC}"
     exit 1
 fi
 
-if [ ! -f "app.json" ]; then
-    echo -e "${RED}❌ app.json not found. Please configure Expo app.json first.${NC}"
+if [ ! -f "config/app.json" ]; then
+    echo -e "${RED}❌ config/app.json not found. Please configure Expo app.json first.${NC}"
     exit 1
 fi
 

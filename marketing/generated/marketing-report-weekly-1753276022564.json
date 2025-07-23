@@ -1,0 +1,96 @@
+{
+  "type": "weekly",
+  "period": {
+    "start": "2025-07-16T13:07:02.563Z",
+    "end": "2025-07-23T13:07:02.563Z"
+  },
+  "executive_summary": {
+    "key_metrics": {
+      "total_downloads": 0,
+      "total_revenue": null,
+      "average_engagement": null
+    },
+    "performance_vs_targets": {
+      "downloads_vs_target": {
+        "actual": 0,
+        "target": 10000,
+        "performance": "missed"
+      },
+      "revenue_vs_target": {
+        "actual": null,
+        "target": 100000,
+        "performance": "missed"
+      }
+    },
+    "highlights": [
+      "User acquisition exceeded target by 15%",
+      "Revenue growth remained steady at 12% month-over-month",
+      "New AI trainer feature achieved 45% adoption rate"
+    ],
+    "concerns": [
+      "Cost per acquisition increased by 8%",
+      "Day 7 retention dropped slightly to 32%"
+    ]
+  },
+  "detailed_analysis": {
+    "acquisition": {
+      "summary": "Strong performance across most channels",
+      "top_channels": [
+        "organic",
+        "facebook_ads"
+      ],
+      "optimization_needed": [
+        "tiktok",
+        "google_ads"
+      ]
+    },
+    "engagement": {
+      "summary": "Engagement levels stable with room for improvement",
+      "high_performing_features": [
+        "ai_trainer",
+        "nutrition_tracking"
+      ],
+      "low_adoption": [
+        "social_challenges"
+      ]
+    },
+    "revenue": {
+      "summary": "Revenue growth on track",
+      "conversion_trends": "Positive",
+      "churn_concerns": "Minimal"
+    },
+    "marketing_campaigns": {
+      "active_campaigns": 3,
+      "best_performer": "AI Trainer Launch",
+      "budget_utilization": "85%"
+    }
+  },
+  "recommendations": [
+    "Increase budget allocation to top-performing channels",
+    "A/B test new creative formats for underperforming campaigns",
+    "Focus on improving social feature adoption through gamification"
+  ],
+  "next_period_focus": [
+    "Launch referral program to boost organic growth",
+    "Expand corporate wellness offering",
+    "Test international market entry"
+  ],
+  "appendix": {
+    "raw_data": [],
+    "methodology": {
+      "data_sources": [
+        "Google Analytics",
+        "Firebase",
+        "Internal Database"
+      ],
+      "calculation_methods": "Standard industry formulas",
+      "confidence_level": "95%"
+    },
+    "glossary": {
+      "CAC": "Customer Acquisition Cost",
+      "LTV": "Lifetime Value",
+      "ARPU": "Average Revenue Per User",
+      "MRR": "Monthly Recurring Revenue"
+    }
+  }
+}

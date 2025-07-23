@@ -288,6 +288,8 @@ const CorporateWellnessDashboard: React.FC = () => {
               data={departmentParticipationData}
               width={width - 40}
               height={200}
+              yAxisLabel=""
+              yAxisSuffix="%"
               chartConfig={{
                 backgroundColor: 'transparent',
                 backgroundGradientFrom: '#fff',

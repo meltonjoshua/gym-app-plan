@@ -215,7 +215,7 @@ const SubscriptionManagementScreen: React.FC = () => {
         <View style={styles.currentSubscriptionButton}>
           <Text style={styles.currentSubscriptionText}>Current Plan</Text>
         </View>
-      ) : tier.id === 'free' && currentSubscription?.price > 0 ? (
+      ) : tier.id === 'free' && (currentSubscription?.price ?? 0) > 0 ? (
         <TouchableOpacity 
           style={styles.cancelButton}
           onPress={handleCancelSubscription}

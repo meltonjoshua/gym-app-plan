@@ -1,0 +1,50 @@
+{
+  "testId": "ab_test_1753276010643",
+  "contentType": "workout",
+  "variations": [
+    {
+      "id": "variant_1",
+      "content": "Transform your body with this intense HIIT workout!",
+      "metrics": {
+        "impressions": 0,
+        "engagement": 0,
+        "clicks": 0,
+        "conversions": 0,
+        "engagementRate": 0,
+        "clickThroughRate": 0,
+        "conversionRate": 0
+      }
+    },
+    {
+      "id": "variant_2",
+      "content": "Ready to sweat? This workout will challenge every muscle!",
+      "metrics": {
+        "impressions": 0,
+        "engagement": 0,
+        "clicks": 0,
+        "conversions": 0,
+        "engagementRate": 0,
+        "clickThroughRate": 0,
+        "conversionRate": 0
+      }
+    },
+    {
+      "id": "variant_3",
+      "content": "Get stronger with this science-based training routine!",
+      "metrics": {
+        "impressions": 0,
+        "engagement": 0,
+        "clicks": 0,
+        "conversions": 0,
+        "engagementRate": 0,
+        "clickThroughRate": 0,
+        "conversionRate": 0
+      }
+    }
+  ],
+  "startDate": "2025-07-23T13:06:50.643Z",
+  "endDate": "2025-07-30T13:06:50.643Z",
+  "status": "running",
+  "winner": null,
+  "confidenceLevel": 0
+}
