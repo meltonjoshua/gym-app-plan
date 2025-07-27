@@ -2,7 +2,7 @@
   "name": "fittracker-pro",
   "version": "1.0.0",
   "description": "A world-class gym and fitness tracking app built with React Native and Expo",
-  "main": "index.ts",
+  "main": "app/index.ts",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
