@@ -2,9 +2,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-// TODO: Implement payment routes with Stripe
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Payment endpoints - TODO' });
-});
+// Payment routes will be implemented when Stripe integration is added
 
 export { router as paymentRoutes };

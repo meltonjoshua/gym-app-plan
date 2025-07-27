@@ -420,4 +420,4 @@ if (require.main === module) {
   main();
 }
 
-export { TypeScriptErrorCollector, TypeScriptError, ErrorSummary };
+export type { TypeScriptErrorCollector, TypeScriptError, ErrorSummary };

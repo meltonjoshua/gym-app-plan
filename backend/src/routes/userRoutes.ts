@@ -2,9 +2,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-// TODO: Implement user routes
-router.get('/profile', (req, res) => {
-  res.status(200).json({ message: 'User profile endpoint - TODO' });
-});
+// User routes will be implemented when user profile management is added
 
 export { router as userRoutes };

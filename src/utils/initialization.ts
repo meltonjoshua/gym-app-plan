@@ -20,7 +20,7 @@ export const initializeApp = async () => {
 
     if (storedUser && storedToken) {
       const user: User = JSON.parse(storedUser);
-      store.dispatch(loginSuccess({ token: storedToken }));
+      store.dispatch(loginSuccess({ token: storedToken, userId: user.id }));
       store.dispatch(setUser(user));
     }
   } catch (error) {

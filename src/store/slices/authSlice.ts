@@ -6,6 +6,7 @@ const initialState: AuthState = {
   isLoading: false,
   error: undefined,
   token: undefined,
+  userId: undefined,
 };
 
 const authSlice = createSlice({
@@ -16,21 +17,24 @@ const authSlice = createSlice({
       state.isLoading = true;
       state.error = undefined;
     },
-    loginSuccess: (state, action: PayloadAction<{ token: string }>) => {
+    loginSuccess: (state, action: PayloadAction<{ token: string; userId: string }>) => {
       state.isLoading = false;
       state.isAuthenticated = true;
       state.token = action.payload.token;
+      state.userId = action.payload.userId;
       state.error = undefined;
     },
     loginFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isAuthenticated = false;
       state.token = undefined;
+      state.userId = undefined;
       state.error = action.payload;
     },
     logout: (state) => {
       state.isAuthenticated = false;
       state.token = undefined;
+      state.userId = undefined;
       state.error = undefined;
       state.isLoading = false;
     },

@@ -25,14 +25,14 @@ export interface ErrorLog {
 export type ErrorType = 
   | 'typescript' | 'runtime' | 'network' | 'camera' | 'storage' 
   | 'ai_model' | 'form_analysis' | 'nutrition' | 'sleep' 
-  | 'analytics' | 'growth_hacking' | 'ui' | 'performance'
+  | 'analytics' | 'ui' | 'performance'
   | 'auth' | 'payment' | 'sync' | 'security';
 
 export type ErrorSeverity = 'critical' | 'high' | 'medium' | 'low' | 'info';
 
 export type ErrorSource = 
   | 'computer_vision' | 'form_analysis' | 'nutrition_ai' | 'sleep_ai'
-  | 'analytics' | 'growth_service' | 'recovery_engine' | 'user_segmentation'
+  | 'analytics' | 'recovery_engine' | 'user_segmentation'
   | 'camera_component' | 'dashboard' | 'navigation' | 'storage'
   | 'network' | 'auth' | 'payments' | 'ui_component' | 'unknown'
   | 'tensorflow' | 'permissions';
@@ -452,7 +452,6 @@ class ErrorLogger {
       nutrition: [],
       sleep: [],
       analytics: [],
-      growth_hacking: [],
       ui: [],
       performance: [],
       auth: [],
@@ -540,7 +539,6 @@ class ErrorLogger {
     if (filePath.includes('nutritionAI')) return 'nutrition_ai';
     if (filePath.includes('sleepAnalysis')) return 'sleep_ai';
     if (filePath.includes('analytics')) return 'analytics';
-    if (filePath.includes('growthHacking')) return 'growth_service';
     if (filePath.includes('recovery')) return 'recovery_engine';
     if (filePath.includes('userSegmentation')) return 'user_segmentation';
     if (filePath.includes('Camera')) return 'camera_component';

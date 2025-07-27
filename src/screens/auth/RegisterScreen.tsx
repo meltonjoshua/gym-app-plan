@@ -75,6 +75,7 @@ export default function RegisterScreen({ navigation }: any) {
         preferredWorkoutDuration: 45,
         joinDate: new Date(),
         lastLogin: new Date(),
+        createdAt: new Date(),
       };
 
       const token = 'demo-token-' + Date.now();
@@ -84,7 +85,7 @@ export default function RegisterScreen({ navigation }: any) {
       await AsyncStorage.setItem('token', token);
 
       // Update Redux state
-      dispatch(loginSuccess({ token }));
+      dispatch(loginSuccess({ token, userId: user.id }));
       dispatch(setUser(user));
 
       Alert.alert('Success', 'Account created successfully!');

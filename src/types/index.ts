@@ -3,6 +3,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  avatar?: string; // Added for social features
   age?: number;
   height?: number; // in cm
   weight?: number; // in kg
@@ -17,7 +18,11 @@ export interface User {
   profilePhoto?: string;
   joinDate: Date;
   lastLogin: Date;
+  availableEquipment?: Equipment[]; // Added for Phase 9
+  createdAt: Date; // Added for compatibility
 }
+
+export type UserProfile = User; // Alias for backward compatibility
 
 export interface UserPreferences {
   workoutTypes?: string[];
@@ -50,12 +55,17 @@ export interface Exercise {
   instructions: string[];
   category: ExerciseCategory;
   muscleGroups: MuscleGroup[];
+  targetMuscles?: MuscleGroup[]; // Added for Phase 9 compatibility
+  type?: ExerciseCategory; // Added for Phase 9 compatibility
   equipment: Equipment[];
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   videoUrl?: string;
   imageUrl?: string;
   duration?: number; // for time-based exercises
-  restTime: number; // in seconds
+  restTime?: number; // in seconds
+  caloriesPerMinute?: number;
+  tips?: string[];
+  sets?: ExerciseSet[]; // Added for Phase 9
 }
 
 export type ExerciseCategory = 
@@ -80,6 +90,7 @@ export type MuscleGroup =
   | 'quadriceps'
   | 'hamstrings'
   | 'calves'
+  | 'legs'
   | 'fullBody';
 
 export type Equipment =
@@ -92,7 +103,9 @@ export type Equipment =
   | 'bench'
   | 'cable_machine'
   | 'treadmill'
-  | 'bike';
+  | 'bike'
+  | 'weights'
+  | 'yoga mat';
 
 // Workout Types
 export interface WorkoutPlan {
@@ -128,6 +141,19 @@ export interface WorkoutExercise {
   weight?: number; // in kg
   restTime: number; // in seconds
   notes?: string;
+}
+
+export interface ExerciseSet {
+  id?: string;
+  setNumber: number;
+  reps?: number;
+  duration?: number; // in seconds
+  weight?: number; // in kg
+  targetReps?: number;
+  targetWeight?: number;
+  targetDuration?: number;
+  restTime?: number;
+  isCompleted?: boolean;
 }
 
 // Session Types
@@ -256,6 +282,7 @@ export interface AuthState {
   isLoading: boolean;
   error?: string;
   token?: string;
+  userId?: string;
 }
 
 export interface UserState {

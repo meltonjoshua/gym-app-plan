@@ -1,1 +1,131 @@
-config/app.json
+{
+  "expo": {
+    "name": "FitTracker Pro",
+    "slug": "fittracker-pro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1a202c"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fittrackerpro.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSHealthShareUsageDescription": "This app integrates with HealthKit to track your fitness data and provide personalized insights.",
+        "NSHealthUpdateUsageDescription": "This app writes workout data to HealthKit to keep your health records synchronized.",
+        "NSMotionUsageDescription": "This app uses motion data to track your workouts and activities.",
+        "NSLocationWhenInUseUsageDescription": "This app uses location to find nearby gyms and track outdoor workouts.",
+        "NSCameraUsageDescription": "This app uses the camera to take progress photos and scan QR codes.",
+        "NSPhotoLibraryUsageDescription": "This app accesses your photo library to select and save progress photos.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone for voice-controlled workouts and coaching.",
+        "NSBluetoothAlwaysUsageDescription": "This app connects to fitness devices and wearables via Bluetooth.",
+        "NSBluetoothPeripheralUsageDescription": "This app connects to fitness devices and wearables via Bluetooth.",
+        "NSContactsUsageDescription": "This app accesses your contacts to help you connect with friends on the platform.",
+        "NSCalendarsUsageDescription": "This app syncs with your calendar to schedule workouts and classes.",
+        "NSRemindersUsageDescription": "This app creates reminders for your workout schedule and goals."
+      },
+      "associatedDomains": [
+        "applinks:fittrackerpro.com",
+        "applinks:api.fittrackerpro.com"
+      ],
+      "entitlements": {
+        "com.apple.developer.healthkit": true,
+        "com.apple.developer.healthkit.access": [
+          "health-records"
+        ]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1a202c"
+      },
+      "package": "com.fittrackerpro.app",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "BLUETOOTH",
+        "BLUETOOTH_ADMIN",
+        "BODY_SENSORS",
+        "ACTIVITY_RECOGNITION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "WAKE_LOCK",
+        "VIBRATE",
+        "USE_FINGERPRINT",
+        "USE_BIOMETRIC"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "fittrackerpro.com"
+            },
+            {
+              "scheme": "https",
+              "host": "api.fittrackerpro.com"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow FitTracker Pro to access your camera to take progress photos and scan QR codes."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow FitTracker Pro to access your photo library to select and save progress photos."
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow FitTracker Pro to access your microphone for voice-controlled workouts."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#4F46E5",
+          "sounds": [
+            "./assets/sounds/workout-complete.wav",
+            "./assets/sounds/goal-achieved.wav"
+          ]
+        }
+      ],
+      "expo-localization"
+    ],
+    "scheme": "fittrackerpro",
+    "owner": "fittrackerpro"
+  }
+}

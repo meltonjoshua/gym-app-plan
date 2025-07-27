@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker Pro - Transform Your Fitness Journey</title>
+    <meta name="description" content="The all-in-one fitness app that helps you track workouts, monitor nutrition, and achieve your health goals with AI-powered insights.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom styles for smooth scrolling -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .star {
+            color: #fbbf24;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">F</span>
+                        </div>
+                        <span class="ml-2 text-xl font-bold text-gray-900">FitTracker Pro</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#features" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Features</a>
+                        <a href="#pricing" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Pricing</a>
+                        <a href="#testimonials" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Reviews</a>
+                        <a href="#download" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition duration-300">Download</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#features" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="#pricing" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Reviews</a>
+                <a href="#download" class="bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Transform Your <span class="text-yellow-400">Fitness Journey</span>
+                    </h1>
+                    <p class="text-xl mb-8 text-blue-100 leading-relaxed">
+                        The all-in-one fitness app that helps you track workouts, monitor nutrition, 
+                        and achieve your health goals with AI-powered insights and personalized coaching.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#download" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-center transition duration-300 shadow-lg">
+                            Download Free App
+                        </a>
+                        <a href="#features" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-center transition duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                    <div class="flex items-center mt-8 space-x-6">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 text-lg">
+                                ★★★★★
+                            </div>
+                            <span class="ml-2 text-blue-100">4.9/5 Rating</span>
+                        </div>
+                        <div class="text-blue-100">
+                            <span class="font-semibold">500K+</span> Downloads
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="relative mx-auto w-80 h-80 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="bg-white/90 p-8 rounded-2xl shadow-xl mb-4">
+                                <div class="text-4xl font-bold text-blue-600 mb-2">FitTracker</div>
+                                <div class="text-gray-600">Your Fitness Companion</div>
+                            </div>
+                            <div class="text-white/80 text-sm">Available on iOS & Android</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Everything You Need to Succeed
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    FitTracker Pro combines cutting-edge technology with proven fitness science 
+                    to deliver a personalized experience that adapts to your lifestyle.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-white text-xl">⚡</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">AI-Powered Workouts</h3>
+                    <p class="text-gray-600">
+                        Get personalized workout plans that adapt to your progress, preferences, and schedule 
+                        with our advanced AI coaching system.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="bg-green-600 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-white text-xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Smart Nutrition Tracking</h3>
+                    <p class="text-gray-600">
+                        Track your meals effortlessly with barcode scanning, recipe analysis, 
+                        and personalized macro recommendations.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="bg-purple-600 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-white text-xl">👥</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Social Community</h3>
+                    <p class="text-gray-600">
+                        Connect with like-minded fitness enthusiasts, share achievements, 
+                        and participate in challenges to stay motivated.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="bg-red-600 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-white text-xl">❤️</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Health Integration</h3>
+                    <p class="text-gray-600">
+                        Seamlessly sync with Apple Health, Google Fit, and popular wearables 
+                        for comprehensive health monitoring.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="bg-yellow-600 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-white text-xl">📈</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Progress Analytics</h3>
+                    <p class="text-gray-600">
+                        Visualize your fitness journey with detailed analytics, progress photos, 
+                        and achievement tracking to stay motivated.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="bg-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
+                        <span class="text-white text-xl">⏰</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Flexible Scheduling</h3>
+                    <p class="text-gray-600">
+                        Adapt your fitness routine to your busy life with smart scheduling, 
+                        quick workouts, and offline access.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Choose Your Plan
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Start free and upgrade when you're ready for premium features
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Free Plan -->
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Free</h3>
+                        <div class="text-4xl font-bold text-gray-900 mb-6">
+                            $0<span class="text-lg text-gray-500">/month</span>
+                        </div>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Basic workout tracking
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Exercise library (100+ exercises)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Basic progress tracking
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Community access
+                            </li>
+                        </ul>
+                        <button class="w-full bg-gray-900 text-white hover:bg-gray-800 px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            Get Started Free
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="bg-blue-600 text-white p-8 rounded-xl relative transform scale-105 shadow-xl">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <span class="bg-yellow-400 text-blue-900 px-4 py-1 rounded-full text-sm font-semibold">
+                            Most Popular
+                        </span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-4">Premium</h3>
+                        <div class="text-4xl font-bold mb-6">
+                            $9.99<span class="text-lg text-blue-200">/month</span>
+                        </div>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <span class="text-yellow-400 mr-2">✓</span>
+                                Everything in Free
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-yellow-400 mr-2">✓</span>
+                                AI-powered workout plans
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-yellow-400 mr-2">✓</span>
+                                Advanced nutrition tracking
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-yellow-400 mr-2">✓</span>
+                                Detailed analytics
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-yellow-400 mr-2">✓</span>
+                                Wearable integrations
+                            </li>
+                        </ul>
+                        <button class="w-full bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            Start 7-Day Free Trial
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Pro</h3>
+                        <div class="text-4xl font-bold text-gray-900 mb-6">
+                            $19.99<span class="text-lg text-gray-500">/month</span>
+                        </div>
+                        <ul class="text-left space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Everything in Premium
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Personal trainer chat
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Custom meal plans
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Advanced AR features
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Early access to features
+                            </li>
+                        </ul>
+                        <button class="w-full bg-gray-900 text-white hover:bg-gray-800 px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            Start Pro Trial
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    What Our Users Say
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Join thousands of people who've transformed their fitness journey
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex text-yellow-400 mb-4 text-lg">
+                        ★★★★★
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "FitTracker Pro completely changed how I approach fitness. The AI coaching 
+                        feels like having a personal trainer in my pocket!"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-blue-600 font-semibold">SJ</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Sarah Johnson</h4>
+                            <p class="text-gray-500">Lost 25 lbs in 4 months</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex text-yellow-400 mb-4 text-lg">
+                        ★★★★★
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "The nutrition tracking is incredible. I never realized how much I was 
+                        overeating until I started using this app."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-green-600 font-semibold">MC</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Mike Chen</h4>
+                            <p class="text-gray-500">Achieved 10% body fat</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex text-yellow-400 mb-4 text-lg">
+                        ★★★★★
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "The community aspect keeps me motivated every day. Love the challenges 
+                        and seeing everyone's progress!"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-purple-600 font-semibold">ER</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Emily Rodriguez</h4>
+                            <p class="text-gray-500">Ran first marathon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-20 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                Ready to Start Your Fitness Journey?
+            </h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                Download FitTracker Pro today and join millions of people who are already 
+                living healthier, happier lives.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300 cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl">🍎</span>
+                        <div class="text-left">
+                            <div class="text-xs">Download on the</div>
+                            <div class="text-lg font-semibold">App Store</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300 cursor-pointer">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl">🤖</span>
+                        <div class="text-left">
+                            <div class="text-xs">Get it on</div>
+                            <div class="text-lg font-semibold">Google Play</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="text-center">
+                <p class="text-blue-200 mb-4">Start with our free plan • No credit card required</p>
+                <div class="flex flex-wrap justify-center items-center gap-8">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">500K+</div>
+                        <div class="text-blue-200">Downloads</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">4.9★</div>
+                        <div class="text-blue-200">App Store Rating</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">50K+</div>
+                        <div class="text-blue-200">5-Star Reviews</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">F</span>
+                        </div>
+                        <span class="ml-2 text-xl font-bold">FitTracker Pro</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Your ultimate fitness companion for a healthier, happier life.
+                    </p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <span class="text-xl">📘</span>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <span class="text-xl">🐦</span>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <span class="text-xl">📷</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition duration-300">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-white transition duration-300">Pricing</a></li>
+                        <li><a href="#download" class="hover:text-white transition duration-300">Download</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Premium</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition duration-300">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition duration-300">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Community</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Instagram</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 FitTracker Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu toggle -->
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Add smooth scrolling animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white/95', 'backdrop-blur-sm');
+            } else {
+                nav.classList.remove('bg-white/95', 'backdrop-blur-sm');
+            }
+        });
+    </script>
+</body>
+</html>

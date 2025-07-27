@@ -35,6 +35,9 @@ import CorporateWellnessDashboard from '../screens/enterprise/CorporateWellnessD
 import FranchiseManagementScreen from '../screens/enterprise/FranchiseManagementScreen';
 // Phase 8: Quantum AI
 import QuantumAIControlCenterScreen from '../screens/ai/QuantumAIControlCenterScreen';
+// Gamification
+import GamificationScreen from '../screens/gamification/GamificationScreen';
+import GameTestScreen from '../screens/gamification/GameTestScreen';
 
 // Navigation types
 export type AuthStackParamList = {
@@ -48,6 +51,7 @@ export type MainTabParamList = {
   Workouts: undefined;
   Progress: undefined;
   Social: undefined; // Phase 2: Social tab
+  Gamification: undefined; // Gamification tab
   Nutrition: undefined;
   Profile: undefined;
 };
@@ -57,6 +61,7 @@ export type HomeStackParamList = {
   AIInsights: undefined;
   VirtualTrainer: undefined; // Phase 3: Virtual Trainer
   QuantumAIControlCenter: undefined; // Phase 8: Quantum AI
+  GameTest: undefined; // Gamification test screen
 };
 
 export type ProfileStackParamList = {
@@ -107,6 +112,11 @@ function HomeNavigator() {
       <HomeStack.Screen 
         name="QuantumAIControlCenter" 
         component={QuantumAIControlCenterScreen}
+        options={{ headerShown: false }}
+      />
+      <HomeStack.Screen 
+        name="GameTest" 
+        component={GameTestScreen}
         options={{ headerShown: false }}
       />
     </HomeStack.Navigator>
@@ -216,6 +226,8 @@ function MainNavigator() {
             iconName = focused ? 'people' : 'people-outline';
           } else if (route.name === 'Nutrition') {
             iconName = focused ? 'restaurant' : 'restaurant-outline';
+          } else if (route.name === 'Gamification') {
+            iconName = focused ? 'trophy' : 'trophy-outline';
           } else if (route.name === 'Profile') {
             iconName = focused ? 'person' : 'person-outline';
           }
@@ -231,7 +243,7 @@ function MainNavigator() {
       <MainTab.Screen name="Workouts" component={WorkoutNavigator} />
       <MainTab.Screen name="Progress" component={ProgressScreen} />
       <MainTab.Screen name="Social" component={SocialScreen} />
-      <MainTab.Screen name="Nutrition" component={NutritionNavigator} />
+      <MainTab.Screen name="Gamification" component={GamificationScreen} />
       <MainTab.Screen name="Profile" component={ProfileNavigator} />
     </MainTab.Navigator>
   );

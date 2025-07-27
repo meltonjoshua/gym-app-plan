@@ -18,6 +18,11 @@ import subscriptionReducer from './slices/subscriptionSlice';
 import corporateWellnessReducer from './slices/corporateWellnessSlice';
 // Phase 8 reducers
 import quantumAIReducer from './slices/quantumAISlice';
+// Gamification
+import gamificationReducer from './slices/gamificationSlice';
+// Error handling
+import errorReducer from './slices/errorSlice';
+import { errorHandlingMiddleware } from '../utils/errorHandling';
 
 export const store = configureStore({
   reducer: {
@@ -40,78 +45,15 @@ export const store = configureStore({
     corporateWellness: corporateWellnessReducer,
     // Phase 8 reducers
     quantumAI: quantumAIReducer,
+    // Gamification
+    gamification: gamificationReducer,
+    // Error handling
+    error: errorReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
-        // Performance optimization: check only on smaller state changes
-        warnAfter: 64, // Increase threshold to 64ms
-        // Ignore specific paths that contain non-serializable data like Date objects
-        ignoredActionsPaths: [
-          'payload.createdAt', 
-          'payload.date', 
-          'payload.startDate', 
-          'payload.endDate', 
-          'payload.timestamp',
-          'payload.completedAt',
-          'payload.sharedAt',
-          'payload.lastUpdated',
-          'payload.createdDate',
-          'payload.acceptedDate',
-          'payload.joinDate',
-          'payload.certificationDate',
-          // Handle array payloads with date fields
-          'payload.0.createdAt',
-          'payload.0.startDate',
-          'payload.0.endDate',
-          'payload.0.completedAt',
-          'payload.0.sharedAt',
-          'payload.0.lastUpdated',
-          'payload.0.createdDate',
-          'payload.0.acceptedDate',
-          'payload.0.joinDate',
-          'payload.0.certifications.0.certificationDate',
-          'payload.0.certifications.1.certificationDate',
-          'payload.0.certifications.2.certificationDate',
-          'payload.1.createdAt',
-          'payload.1.startDate',
-          'payload.1.endDate',
-          'payload.1.certifications.0.certificationDate',
-          'payload.1.certifications.1.certificationDate'
-        ],
-        ignoredPaths: [
-          // Social slice date paths
-          'social.challenges.0.startDate', 
-          'social.challenges.0.endDate',
-          'social.challenges.0.participants.0.joinDate',
-          'social.friends.0.createdDate',
-          'social.friends.0.acceptedDate',
-          'social.friendRequests.0.createdDate',
-          'social.workoutShares.0.completedAt',
-          'social.workoutShares.0.sharedAt',
-          'social.leaderboards.0.lastUpdated',
-          // AI slice date paths
-          'ai.recommendations.0.createdAt',
-          'ai.recommendations.1.createdAt',
-          // Trainer marketplace date paths (multiple certification dates)
-          'trainerMarketplace.trainers.0.certifications.0.certificationDate',
-          'trainerMarketplace.trainers.0.certifications.1.certificationDate',
-          'trainerMarketplace.trainers.0.certifications.2.certificationDate',
-          'trainerMarketplace.trainers.0.joinDate',
-          'trainerMarketplace.trainers.1.certifications.0.certificationDate',
-          'trainerMarketplace.trainers.1.certifications.1.certificationDate',
-          'trainerMarketplace.trainers.1.joinDate',
-          'trainerMarketplace.trainers.2.certifications.0.certificationDate',
-          'trainerMarketplace.trainers.2.joinDate',
-          // Quantum AI date paths
-          'quantumAI.consciousness.lastThought',
-          'quantumAI.consciousness.experiences',
-          'quantumAI.metaverse.environments',
-          'quantumAI.metaverse.environments.0.createdAt'
-        ],
-      },
-    }),
+      serializableCheck: false, // Disabled to allow Date objects in state
+    }).concat(errorHandlingMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

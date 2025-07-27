@@ -2,9 +2,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-// TODO: Implement nutrition routes
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Nutrition endpoints - TODO' });
-});
+// Nutrition tracking routes will be implemented when nutrition backend is added
 
 export { router as nutritionRoutes };

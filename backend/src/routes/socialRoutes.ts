@@ -2,9 +2,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-// TODO: Implement social routes
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Social endpoints - TODO' });
-});
+// Social features routes will be implemented when social functionality is added
 
 export { router as socialRoutes };

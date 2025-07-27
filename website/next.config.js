@@ -3,6 +3,11 @@ const nextConfig = {
   // Enable static export for cPanel compatibility
   output: 'export',
   
+  // Point to src directory
+  experimental: {
+    appDir: true
+  },
+  
   // Disable image optimization for static export
   images: {
     unoptimized: true
