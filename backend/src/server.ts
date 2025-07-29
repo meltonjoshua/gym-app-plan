@@ -7,12 +7,12 @@ import { createServer } from 'http';
 import { Server as SocketServer } from 'socket.io';
 import dotenv from 'dotenv';
 
-import { connectDatabase } from '@/utils/database';
-import { connectRedis } from '@/utils/redis';
-import { setupSocketHandlers } from '@/services/socketService';
-import { errorHandler } from '@/middleware/errorHandler';
-import { logger } from '@/utils/logger';
-import { apiRoutes } from '@/routes';
+import { connectDatabase } from './utils/database';
+import { connectRedis } from './utils/redis';
+import { setupSocketHandlers } from './services/socketService';
+import { errorHandler } from './middleware/errorHandler';
+import { logger } from './utils/logger';
+import { apiRoutes } from './routes';
 
 // Load environment variables
 dotenv.config();
