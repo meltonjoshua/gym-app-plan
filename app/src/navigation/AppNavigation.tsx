@@ -35,6 +35,14 @@ import CorporateWellnessDashboard from '../screens/enterprise/CorporateWellnessD
 import FranchiseManagementScreen from '../screens/enterprise/FranchiseManagementScreen';
 // Phase 8: Quantum AI
 import QuantumAIControlCenterScreen from '../screens/ai/QuantumAIControlCenterScreen';
+// Phase 12: Analytics & Business Intelligence
+import UserAnalyticsScreen from '../screens/analytics/UserAnalyticsScreen';
+import ProgressDashboardScreen from '../screens/analytics/ProgressDashboardScreen';
+import PremiumAnalyticsScreen from '../screens/analytics/PremiumAnalyticsScreen';
+import AdminDashboardScreen from '../screens/analytics/AdminDashboardScreen';
+import CohortAnalysisScreen from '../screens/analytics/CohortAnalysisScreen';
+import ABTestingScreen from '../screens/analytics/ABTestingScreen';
+import AutomatedReportsScreen from '../screens/analytics/AutomatedReportsScreen';
 // Gamification
 import GamificationScreen from '../screens/gamification/GamificationScreen';
 import GameTestScreen from '../screens/gamification/GameTestScreen';
@@ -73,6 +81,17 @@ export type ProfileStackParamList = {
   FranchiseManagement: undefined; // Phase 6: Franchise Management
 };
 
+export type ProgressStackParamList = {
+  ProgressMain: undefined;
+  UserAnalytics: undefined;
+  ProgressDashboard: undefined;
+  PremiumAnalytics: undefined;
+  AdminDashboard: undefined;
+  CohortAnalysis: undefined;
+  ABTesting: undefined;
+  AutomatedReports: undefined;
+};
+
 export type NutritionStackParamList = {
   NutritionMain: undefined;
   AdvancedNutrition: undefined; // Phase 3: Enhanced Nutrition AI
@@ -88,6 +107,7 @@ const AuthStack = createStackNavigator<AuthStackParamList>();
 const MainTab = createBottomTabNavigator<MainTabParamList>();
 const HomeStack = createStackNavigator<HomeStackParamList>(); // Phase 2: Home stack
 const ProfileStack = createStackNavigator<ProfileStackParamList>(); // Phase 2: Profile stack
+const ProgressStack = createStackNavigator<ProgressStackParamList>(); // Phase 12: Progress & Analytics stack
 const NutritionStack = createStackNavigator<NutritionStackParamList>(); // Phase 3: Nutrition stack
 const WorkoutStack = createStackNavigator<WorkoutStackParamList>();
 
@@ -177,6 +197,53 @@ function NutritionNavigator() {
   );
 }
 
+function ProgressNavigator() {
+  return (
+    <ProgressStack.Navigator>
+      <ProgressStack.Screen 
+        name="ProgressMain" 
+        component={ProgressScreen}
+        options={{ headerShown: false }}
+      />
+      <ProgressStack.Screen 
+        name="UserAnalytics" 
+        component={UserAnalyticsScreen}
+        options={{ headerShown: false }}
+      />
+      <ProgressStack.Screen 
+        name="ProgressDashboard" 
+        component={ProgressDashboardScreen}
+        options={{ headerShown: false }}
+      />
+      <ProgressStack.Screen 
+        name="PremiumAnalytics" 
+        component={PremiumAnalyticsScreen}
+        options={{ headerShown: false }}
+      />
+      <ProgressStack.Screen 
+        name="AdminDashboard" 
+        component={AdminDashboardScreen}
+        options={{ headerShown: false }}
+      />
+      <ProgressStack.Screen 
+        name="CohortAnalysis" 
+        component={CohortAnalysisScreen}
+        options={{ headerShown: false }}
+      />
+      <ProgressStack.Screen 
+        name="ABTesting" 
+        component={ABTestingScreen}
+        options={{ headerShown: false }}
+      />
+      <ProgressStack.Screen 
+        name="AutomatedReports" 
+        component={AutomatedReportsScreen}
+        options={{ headerShown: false }}
+      />
+    </ProgressStack.Navigator>
+  );
+}
+
 function WorkoutNavigator() {
   return (
     <WorkoutStack.Navigator>
@@ -241,7 +308,7 @@ function MainNavigator() {
     >
       <MainTab.Screen name="Home" component={HomeNavigator} />
       <MainTab.Screen name="Workouts" component={WorkoutNavigator} />
-      <MainTab.Screen name="Progress" component={ProgressScreen} />
+      <MainTab.Screen name="Progress" component={ProgressNavigator} />
       <MainTab.Screen name="Social" component={SocialScreen} />
       <MainTab.Screen name="Gamification" component={GamificationScreen} />
       <MainTab.Screen name="Profile" component={ProfileNavigator} />

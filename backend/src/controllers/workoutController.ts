@@ -332,7 +332,7 @@ export const completeWorkoutSession = asyncHandler(async (req: AuthenticatedRequ
     userId,
     sessionId: session._id,
     duration: session.totalDuration,
-    exercisesCompleted: session.exercises.filter(ex => !ex.skipped).length
+    completionPercentage: session.completionPercentage
   });
 
   res.status(200).json({

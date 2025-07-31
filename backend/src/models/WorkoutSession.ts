@@ -13,6 +13,9 @@ export interface IWorkoutSession extends Document {
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
+  
+  // Virtual properties
+  completionPercentage: number;
 }
 
 export interface ISessionExercise {

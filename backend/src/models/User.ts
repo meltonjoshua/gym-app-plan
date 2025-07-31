@@ -30,6 +30,9 @@ export interface IUser extends Document {
   loginAttempts: number;
   lockUntil?: Date;
   
+  // Payment and billing
+  stripeCustomerId?: string;
+  
   // Subscription and preferences
   subscription?: {
     plan: 'free' | 'premium' | 'pro';
@@ -166,6 +169,13 @@ const userSchema = new Schema<IUser>({
     default: 0
   },
   lockUntil: Date,
+  
+  // Payment and billing
+  stripeCustomerId: {
+    type: String,
+    sparse: true,
+    index: true
+  },
   
   // Subscription
   subscription: {

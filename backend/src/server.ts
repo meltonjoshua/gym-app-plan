@@ -13,6 +13,7 @@ import { setupSocketHandlers } from './services/socketService';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './utils/logger';
 import { apiRoutes } from './routes';
+import { trackApiRequest } from './middleware/analyticsMiddleware';
 
 // Load environment variables
 dotenv.config();
@@ -72,6 +73,9 @@ app.use(cors({
 app.use(compression());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Analytics tracking for all API requests
+app.use('/api/', trackApiRequest('navigation'));
 
 // Health check endpoint
 app.get('/health', (req, res) => {

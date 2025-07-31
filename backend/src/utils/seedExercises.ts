@@ -6,10 +6,9 @@ const sampleExercises = [
   // Chest Exercises
   {
     name: 'Push-ups',
-    description: 'Classic bodyweight exercise targeting chest, shoulders, and triceps',
     category: 'strength',
     muscleGroups: ['chest', 'shoulders', 'triceps'],
-    equipment: ['bodyweight'],
+    equipment: ['none'],
     difficulty: 'beginner',
     instructions: [
       'Start in a plank position with hands shoulder-width apart',
@@ -19,20 +18,19 @@ const sampleExercises = [
     ],
     tips: [
       'Keep your body in a straight line',
-      'Don\'t let your hips sag',
-      'Control the movement'
+      'Don\'t let your hips sag or pike up',
+      'Control the movement, don\'t rush'
     ],
-    variations: ['incline push-ups', 'decline push-ups', 'diamond push-ups'],
+    variations: ['knee push-ups', 'diamond push-ups', 'incline push-ups'],
     targetMuscles: {
       primary: ['chest'],
-      secondary: ['shoulders', 'triceps']
+      secondary: ['shoulders', 'triceps', 'core']
     },
     caloriesPerMinute: 8,
     isCustom: false
   },
   {
     name: 'Bench Press',
-    description: 'Classic barbell exercise for building chest strength and mass',
     category: 'strength',
     muscleGroups: ['chest', 'shoulders', 'triceps'],
     equipment: ['barbell', 'bench'],
@@ -44,11 +42,11 @@ const sampleExercises = [
       'Press the bar back up to full arm extension'
     ],
     tips: [
-      'Keep core tight throughout movement',
-      'Control the descent',
-      'Full range of motion for best results'
+      'Keep your shoulder blades retracted',
+      'Don\'t bounce the bar off your chest',
+      'Use a spotter for safety'
     ],
-    variations: ['incline bench press', 'dumbbell bench press', 'close-grip bench press'],
+    variations: ['dumbbell bench press', 'incline bench press', 'close-grip bench press'],
     targetMuscles: {
       primary: ['chest'],
       secondary: ['shoulders', 'triceps']
@@ -60,7 +58,6 @@ const sampleExercises = [
   // Back Exercises
   {
     name: 'Pull-ups',
-    description: 'Bodyweight exercise targeting back and biceps',
     category: 'strength',
     muscleGroups: ['back', 'biceps'],
     equipment: ['pull-up bar'],
@@ -86,7 +83,6 @@ const sampleExercises = [
   },
   {
     name: 'Bent-over Row',
-    description: 'Barbell exercise for back strength and muscle development',
     category: 'strength',
     muscleGroups: ['back', 'biceps'],
     equipment: ['barbell'],
@@ -114,7 +110,6 @@ const sampleExercises = [
   // Leg Exercises
   {
     name: 'Squats',
-    description: 'Fundamental lower body exercise for strength and mobility',
     category: 'strength',
     muscleGroups: ['legs', 'glutes'],
     equipment: ['none'],
@@ -140,7 +135,6 @@ const sampleExercises = [
   },
   {
     name: 'Deadlift',
-    description: 'Compound exercise targeting posterior chain muscles',
     category: 'strength',
     muscleGroups: ['legs', 'back', 'glutes'],
     equipment: ['barbell'],
@@ -168,21 +162,20 @@ const sampleExercises = [
   // Cardio Exercises
   {
     name: 'Running',
-    description: 'Cardiovascular exercise for endurance and leg strength',
     category: 'cardio',
     muscleGroups: ['legs', 'core'],
     equipment: ['none'],
     difficulty: 'beginner',
     instructions: [
-      'Start with a light jog to warm up',
-      'Maintain a steady pace',
+      'Maintain an upright posture',
       'Land on the balls of your feet',
-      'Keep your arms relaxed and swing naturally'
+      'Keep arms relaxed and swinging naturally',
+      'Breathe rhythmically'
     ],
     tips: [
-      'Start slow and build distance gradually',
-      'Focus on breathing rhythm',
-      'Wear proper running shoes'
+      'Start with a comfortable pace',
+      'Gradually increase distance and speed',
+      'Stay hydrated'
     ],
     variations: ['jogging', 'sprinting', 'interval running'],
     targetMuscles: {
@@ -194,7 +187,6 @@ const sampleExercises = [
   },
   {
     name: 'Burpees',
-    description: 'Full-body exercise combining cardio and strength training',
     category: 'cardio',
     muscleGroups: ['full body'],
     equipment: ['none'],
@@ -222,7 +214,6 @@ const sampleExercises = [
   // Core Exercises
   {
     name: 'Plank',
-    description: 'Isometric core exercise for stability and strength',
     category: 'core',
     muscleGroups: ['core'],
     equipment: ['none'],
@@ -248,7 +239,6 @@ const sampleExercises = [
   },
   {
     name: 'Mountain Climbers',
-    description: 'Dynamic core exercise with cardiovascular benefits',
     category: 'cardio',
     muscleGroups: ['core', 'legs'],
     equipment: ['none'],
@@ -294,11 +284,11 @@ export const seedExercises = async (): Promise<void> => {
   }
 };
 
-// Allow this file to be run directly for seeding
+// Run seed function if called directly
 if (require.main === module) {
   mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/fittracker')
     .then(() => {
-      logger.info('Connected to MongoDB for seeding');
+      logger.info('Connected to MongoDB');
       return seedExercises();
     })
     .then(() => {
