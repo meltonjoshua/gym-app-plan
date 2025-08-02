@@ -1,0 +1,12 @@
+{"level":"info","message":"🌐 API Gateway running on port 3000","timestamp":"2025-08-02T02:21:03.941Z"}
+{"level":"info","message":"🏥 Health check: http://localhost:3000/health","timestamp":"2025-08-02T02:21:03.942Z"}
+{"level":"info","message":"🔗 Service routes configured:","timestamp":"2025-08-02T02:21:03.943Z"}
+{"level":"info","message":"  - /api/v1/users -> User Service","timestamp":"2025-08-02T02:21:03.943Z"}
+{"level":"info","message":"  - /api/v1/auth -> User Service","timestamp":"2025-08-02T02:21:03.943Z"}
+{"level":"info","message":"  - /api/v1/profiles -> User Service","timestamp":"2025-08-02T02:21:03.943Z"}
+{"level":"info","message":"  - /api/v1/workouts -> Workout Service","timestamp":"2025-08-02T02:21:03.944Z"}
+{"level":"info","message":"  - /api/v1/ai -> AI Service","timestamp":"2025-08-02T02:21:03.944Z"}
+{"level":"info","message":"  - /api/v1/notifications -> Notification Service","timestamp":"2025-08-02T02:21:03.944Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","timestamp":"2025-08-02T02:21:10.483Z","url":"/health?id=db8589b0-730f-468c-af16-7f6951e33522&vscodeBrowserReqId=1754101270470","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.102.2 Chrome/134.0.6998.205 Electron/35.6.0 Safari/537.36"},"timestamp":"2025-08-02T02:21:10.483Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","timestamp":"2025-08-02T02:21:19.628Z","url":"/api/v1/auth/health","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-GB) WindowsPowerShell/5.1.26100.4768"},"timestamp":"2025-08-02T02:21:19.628Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","timestamp":"2025-08-02T02:26:39.156Z","url":"/api/v1/workouts/health","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-GB) WindowsPowerShell/5.1.26100.4768"},"timestamp":"2025-08-02T02:26:39.156Z"}

@@ -1,0 +1,324 @@
+{
+  error: Error: Cannot find module '@/models/User'
+  Require stack:
+  - c:\Users\melto\Documents\GitHub\gym-app-plan\backend\dist\services\socketService.js
+  - c:\Users\melto\Documents\GitHub\gym-app-plan\backend\dist\server.js
+      at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+      at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+      at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+      at Function._load (node:internal/modules/cjs/loader:1211:37)
+      at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+      at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+      at Module.require (node:internal/modules/cjs/loader:1487:12)
+      at require (node:internal/modules/helpers:135:16)
+      at Object.<anonymous> (c:\Users\melto\Documents\GitHub\gym-app-plan\backend\dist\services\socketService.js:8:16)
+      at Module._compile (node:internal/modules/cjs/loader:1730:14) {
+    code: 'MODULE_NOT_FOUND',
+    requireStack: [
+      'c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js',
+      'c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js'
+    ]
+  },
+  level: 'error',
+  message: "uncaughtException: Cannot find module '@/models/User'\n" +
+    'Require stack:\n' +
+    '- c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js\n' +
+    '- c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js\n' +
+    "Error: Cannot find module '@/models/User'\n" +
+    'Require stack:\n' +
+    '- c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js\n' +
+    '- c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js\n' +
+    '    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)\n' +
+    '    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)\n' +
+    '    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)\n' +
+    '    at Function._load (node:internal/modules/cjs/loader:1211:37)\n' +
+    '    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n' +
+    '    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n' +
+    '    at Module.require (node:internal/modules/cjs/loader:1487:12)\n' +
+    '    at require (node:internal/modules/helpers:135:16)\n' +
+    '    at Object.<anonymous> (c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js:8:16)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1730:14)',
+  stack: "Error: Cannot find module '@/models/User'\n" +
+    'Require stack:\n' +
+    '- c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js\n' +
+    '- c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js\n' +
+    '    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)\n' +
+    '    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)\n' +
+    '    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)\n' +
+    '    at Function._load (node:internal/modules/cjs/loader:1211:37)\n' +
+    '    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n' +
+    '    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n' +
+    '    at Module.require (node:internal/modules/cjs/loader:1487:12)\n' +
+    '    at require (node:internal/modules/helpers:135:16)\n' +
+    '    at Object.<anonymous> (c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js:8:16)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1730:14)',
+  exception: true,
+  date: 'Fri Aug 01 2025 18:09:39 GMT+0100 (British Summer Time)',
+  process: {
+    pid: 19472,
+    uid: null,
+    gid: null,
+    cwd: 'C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan',
+    execPath: 'C:\\Program Files\\nodejs\\node.exe',
+    version: 'v22.17.0',
+    argv: [
+      'C:\\Program Files\\nodejs\\node.exe',
+      'c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js'
+    ],
+    memoryUsage: {
+      rss: 109330432,
+      heapTotal: 74711040,
+      heapUsed: 52174288,
+      external: 20536229,
+      arrayBuffers: 18264303
+    }
+  },
+  os: { loadavg: [ 0, 0, 0 ], uptime: 413709.437 },
+  trace: [
+    {
+      column: 15,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Function._resolveFilename',
+      line: 1401,
+      method: '_resolveFilename',
+      native: false
+    },
+    {
+      column: 19,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'defaultResolveImpl',
+      line: 1057,
+      method: null,
+      native: false
+    },
+    {
+      column: 22,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'resolveForCJSWithHooks',
+      line: 1062,
+      method: null,
+      native: false
+    },
+    {
+      column: 37,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Function._load',
+      line: 1211,
+      method: '_load',
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:diagnostics_channel',
+      function: 'TracingChannel.traceSync',
+      line: 322,
+      method: 'traceSync',
+      native: false
+    },
+    {
+      column: 24,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'wrapModuleLoad',
+      line: 235,
+      method: null,
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module.require',
+      line: 1487,
+      method: 'require',
+      native: false
+    },
+    {
+      column: 16,
+      file: 'node:internal/modules/helpers',
+      function: 'require',
+      line: 135,
+      method: null,
+      native: false
+    },
+    {
+      column: 16,
+      file: 'c:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js',
+      function: null,
+      line: 8,
+      method: null,
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._compile',
+      line: 1730,
+      method: '_compile',
+      native: false
+    }
+  ],
+  service: 'fittracker-pro-backend',
+  version: '1.0.0',
+  timestamp: '2025-08-01 18:09:39'
+}
+{
+  error: Error: Cannot find module '@/models/User'
+  Require stack:
+  - C:\Users\melto\Documents\GitHub\gym-app-plan\backend\dist\services\socketService.js
+  - C:\Users\melto\Documents\GitHub\gym-app-plan\backend\dist\server.js
+      at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+      at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+      at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+      at Function._load (node:internal/modules/cjs/loader:1211:37)
+      at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+      at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+      at Module.require (node:internal/modules/cjs/loader:1487:12)
+      at require (node:internal/modules/helpers:135:16)
+      at Object.<anonymous> (C:\Users\melto\Documents\GitHub\gym-app-plan\backend\dist\services\socketService.js:8:16)
+      at Module._compile (node:internal/modules/cjs/loader:1730:14) {
+    code: 'MODULE_NOT_FOUND',
+    requireStack: [
+      'C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js',
+      'C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js'
+    ]
+  },
+  level: 'error',
+  message: "uncaughtException: Cannot find module '@/models/User'\n" +
+    'Require stack:\n' +
+    '- C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js\n' +
+    '- C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js\n' +
+    "Error: Cannot find module '@/models/User'\n" +
+    'Require stack:\n' +
+    '- C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js\n' +
+    '- C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js\n' +
+    '    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)\n' +
+    '    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)\n' +
+    '    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)\n' +
+    '    at Function._load (node:internal/modules/cjs/loader:1211:37)\n' +
+    '    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n' +
+    '    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n' +
+    '    at Module.require (node:internal/modules/cjs/loader:1487:12)\n' +
+    '    at require (node:internal/modules/helpers:135:16)\n' +
+    '    at Object.<anonymous> (C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js:8:16)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1730:14)',
+  stack: "Error: Cannot find module '@/models/User'\n" +
+    'Require stack:\n' +
+    '- C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js\n' +
+    '- C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js\n' +
+    '    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)\n' +
+    '    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)\n' +
+    '    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)\n' +
+    '    at Function._load (node:internal/modules/cjs/loader:1211:37)\n' +
+    '    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n' +
+    '    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)\n' +
+    '    at Module.require (node:internal/modules/cjs/loader:1487:12)\n' +
+    '    at require (node:internal/modules/helpers:135:16)\n' +
+    '    at Object.<anonymous> (C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js:8:16)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1730:14)',
+  exception: true,
+  date: 'Sat Aug 02 2025 01:08:37 GMT+0100 (British Summer Time)',
+  process: {
+    pid: 2448,
+    uid: null,
+    gid: null,
+    cwd: 'C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan',
+    execPath: 'C:\\Program Files\\nodejs\\node.exe',
+    version: 'v22.17.0',
+    argv: [
+      'C:\\Program Files\\nodejs\\node.exe',
+      'C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\server.js'
+    ],
+    memoryUsage: {
+      rss: 112263168,
+      heapTotal: 74194944,
+      heapUsed: 53491672,
+      external: 20536229,
+      arrayBuffers: 18264303
+    }
+  },
+  os: { loadavg: [ 0, 0, 0 ], uptime: 438847.906 },
+  trace: [
+    {
+      column: 15,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Function._resolveFilename',
+      line: 1401,
+      method: '_resolveFilename',
+      native: false
+    },
+    {
+      column: 19,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'defaultResolveImpl',
+      line: 1057,
+      method: null,
+      native: false
+    },
+    {
+      column: 22,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'resolveForCJSWithHooks',
+      line: 1062,
+      method: null,
+      native: false
+    },
+    {
+      column: 37,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Function._load',
+      line: 1211,
+      method: '_load',
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:diagnostics_channel',
+      function: 'TracingChannel.traceSync',
+      line: 322,
+      method: 'traceSync',
+      native: false
+    },
+    {
+      column: 24,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'wrapModuleLoad',
+      line: 235,
+      method: null,
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module.require',
+      line: 1487,
+      method: 'require',
+      native: false
+    },
+    {
+      column: 16,
+      file: 'node:internal/modules/helpers',
+      function: 'require',
+      line: 135,
+      method: null,
+      native: false
+    },
+    {
+      column: 16,
+      file: 'C:\\Users\\melto\\Documents\\GitHub\\gym-app-plan\\backend\\dist\\services\\socketService.js',
+      function: null,
+      line: 8,
+      method: null,
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._compile',
+      line: 1730,
+      method: '_compile',
+      native: false
+    }
+  ],
+  service: 'fittracker-pro-backend',
+  version: '1.0.0',
+  timestamp: '2025-08-02 01:08:37'
+}

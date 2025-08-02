@@ -1,0 +1,21 @@
+{"level":"info","message":"💪 Workout Service running on port 3002","timestamp":"2025-08-02T02:47:56.053Z"}
+{"level":"info","message":"🏥 Health check: http://localhost:3002/health","timestamp":"2025-08-02T02:47:56.055Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:00.608Z","url":"/health"},"timestamp":"2025-08-02T02:48:00.608Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:02.631Z","url":"/health"},"timestamp":"2025-08-02T02:48:02.631Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:04.638Z","url":"/health"},"timestamp":"2025-08-02T02:48:04.638Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:06.657Z","url":"/health"},"timestamp":"2025-08-02T02:48:06.657Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:08.667Z","url":"/health"},"timestamp":"2025-08-02T02:48:08.667Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:10.675Z","url":"/health"},"timestamp":"2025-08-02T02:48:10.675Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:12.684Z","url":"/health"},"timestamp":"2025-08-02T02:48:12.684Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:14.689Z","url":"/health"},"timestamp":"2025-08-02T02:48:14.689Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:16.701Z","url":"/health"},"timestamp":"2025-08-02T02:48:16.701Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:18.709Z","url":"/health"},"timestamp":"2025-08-02T02:48:18.709Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:20.718Z","url":"/health"},"timestamp":"2025-08-02T02:48:20.718Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:22.729Z","url":"/health"},"timestamp":"2025-08-02T02:48:22.729Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:24.740Z","url":"/health"},"timestamp":"2025-08-02T02:48:24.740Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:26.754Z","url":"/health"},"timestamp":"2025-08-02T02:48:26.754Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:28.759Z","url":"/health"},"timestamp":"2025-08-02T02:48:28.759Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:48:30.768Z","url":"/health"},"timestamp":"2025-08-02T02:48:30.768Z"}
+{"level":"info","message":"💪 Workout Service running on port 3002","timestamp":"2025-08-02T02:49:26.114Z"}
+{"level":"info","message":"🏥 Health check: http://localhost:3002/health","timestamp":"2025-08-02T02:49:26.116Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","service":"workout-service","timestamp":"2025-08-02T02:52:59.229Z","url":"/health"},"timestamp":"2025-08-02T02:52:59.229Z"}
