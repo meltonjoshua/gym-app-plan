@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cops & Robbers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="hidden">
+        <!-- Character Selection Screen -->
+        <div id="characterSelection" class="screen hidden">
+            <div class="container">
+                <h1>Select Your Character</h1>
+                <div class="role-indicator">
+                    <span id="roleText">Role: Police Officer</span>
+                </div>
+                <div class="character-grid" id="characterGrid">
+                    <!-- Characters will be populated by JavaScript -->
+                </div>
+                <div class="instructions">
+                    <p>Choose your character model for the game</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehicle Selection Screen -->
+        <div id="vehicleSelection" class="screen hidden">
+            <div class="container">
+                <h1>Select Your Vehicle</h1>
+                <div class="role-indicator">
+                    <span id="vehicleRoleText">Role: Police Officer</span>
+                </div>
+                <div class="vehicle-grid" id="vehicleGrid">
+                    <!-- Vehicles will be populated by JavaScript -->
+                </div>
+                <div class="instructions">
+                    <p>Choose your vehicle for the chase</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Results Screen -->
+        <div id="gameResults" class="screen hidden">
+            <div class="container">
+                <h1 id="winTitle">Game Results</h1>
+                <div class="results-content">
+                    <div class="win-message">
+                        <h2 id="winMessage">Police Win!</h2>
+                    </div>
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Game Duration:</span>
+                            <span class="stat-value" id="gameDuration">0:00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Players:</span>
+                            <span class="stat-value" id="totalPlayers">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Police Officers:</span>
+                            <span class="stat-value" id="policeCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Robbers:</span>
+                            <span class="stat-value" id="robbersCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Arrests Made:</span>
+                            <span class="stat-value" id="arrestsCount">0</span>
+                        </div>
+                    </div>
+                    <button id="closeResults" class="btn btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="screen hidden">
+            <div class="container">
+                <h1>Loading...</h1>
+                <div class="loading-spinner"></div>
+                <p id="loadingText">Preparing game...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
